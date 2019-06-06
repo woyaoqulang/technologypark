@@ -1,4 +1,4 @@
-package com.clare.technologypark;
+package com.clare.controller.technologypark;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
