@@ -1,19 +1,18 @@
 package com.clare.controller.technologypark;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @description: 世界你好
+ * @description: 登录
  * @author: ZhangHao
  * @create: 2019-04-26 15:48
  **/
-@RestController
+@Controller
 public class HelloWorldController
 {
-    @GetMapping("/hello")
-    public String say(){
-        return "Hello woddrld, ffs";
+    @RequestMapping("/index")
+    public String index(){
+        return "index";
     }
 }
