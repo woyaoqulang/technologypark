@@ -1,12 +1,17 @@
 package com.clare.pojo;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @Author : zhangHao
  * @Date : 2019-07-09 19:54
  * @Description :
  */
+@Table
 public class User {
-    
+
+    @Id
     private Integer id;
 
     private String username;
