@@ -15,8 +15,8 @@
         <property name="javaFileEncoding" value="utf-8"/>
 
         <!-- 通过自定义插件类生成自定义注解和接口 -->
-      <!--  <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-            <property name="mappers" value="tk.mybatis.mapper.common.BaseMapper"/>
+      <!--  <plugin type="com.xe.demo.common.generator.GenPlugin">
+            <property name="mappers" value="com.xe.demo.mapper.BaseMapper" />
         </plugin>-->
 
         <commentGenerator>
