@@ -5,8 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * @author DELL
- */
+ * 启动类
+ * @author zhangHao
+ * @date 2019/7/15 22:47
+*/
 @SpringBootApplication
 @ComponentScan({"com.clare"})
 public class Application {
