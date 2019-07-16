@@ -21,7 +21,7 @@ import java.util.Set;
 
 /**
  * 自定义插件
- * 
+ *
  * @author CZH
  */
 public class GenPlugin extends PluginAdapter
@@ -61,7 +61,7 @@ public class GenPlugin extends PluginAdapter
 
     /**
      * 生成的Mapper接口
-     * 
+     *
      * @param interfaze
      * @param topLevelClass
      * @param introspectedTable
@@ -183,7 +183,7 @@ public class GenPlugin extends PluginAdapter
 
     /**
      * 公共SQL
-     * 
+     *
      * @param id
      * @param sqlStr
      * @return
@@ -198,7 +198,7 @@ public class GenPlugin extends PluginAdapter
 
     /**
      * 查询
-     * 
+     *
      * @param id
      * @param tableName
      * @param pkColumn
@@ -229,7 +229,7 @@ public class GenPlugin extends PluginAdapter
 
     /**
      * 保存
-     * 
+     *
      * @param id
      * @param pkColumn
      * @return
@@ -254,7 +254,7 @@ public class GenPlugin extends PluginAdapter
 
     /**
      * 更新
-     * 
+     *
      * @param id
      * @return
      */
@@ -275,7 +275,7 @@ public class GenPlugin extends PluginAdapter
 
     /**
      * 删除
-     * 
+     *
      * @param tableName
      * @param pkColumn
      * @param method
