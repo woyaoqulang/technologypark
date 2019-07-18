@@ -1,6 +1,6 @@
-package com.clare.vo;
+package com.clare.core.vo;
 
-import com.clare.util.ErrorCode;
+import com.clare.core.common.ErrorCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

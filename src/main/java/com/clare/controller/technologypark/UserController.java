@@ -1,7 +1,6 @@
 package com.clare.controller.technologypark;
 
 
-import com.clare.pojo.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.apachecommons.CommonsLog;
@@ -21,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
 
-    @ApiOperation("")
+   /* @ApiOperation("")
     @GetMapping("/getUser")
     public User getUser(){
         User user = new User();
         return user;
-    }
+    }*/
 }

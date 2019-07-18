@@ -1,63 +1,39 @@
 package com.clare.pojo;
 
+import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
+import javax.persistence.Table;
+import lombok.Data;
+
+/**
+ * 
+ * @author : zhangHao
+ * @data : 2019-07-18 20:11
+*/
+@Data
+@Table
 public class User {
+    @ApiModelProperty(value = "主键id")
     private Integer id;
 
+    @ApiModelProperty(value = "用户名")
     private String username;
 
+    @ApiModelProperty(value = "密码")
     private String password;
 
+    @ApiModelProperty(value = "姓名")
     private String name;
 
+    @ApiModelProperty(value = "手机号")
     private String phone;
 
+    @ApiModelProperty(value = "邮箱")
     private String email;
 
-    public Integer getId() {
-        return id;
-    }
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 }

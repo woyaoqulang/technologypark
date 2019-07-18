@@ -1,4 +1,4 @@
-package com.clare.util;
+package com.clare.util.generator;
 
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
@@ -28,7 +28,9 @@ public class GenCommentGenerator implements CommentGenerator {
 	@Override
 	public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
 		if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
-			field.addJavaDocLine("//" + introspectedColumn.getRemarks());
+			field.addJavaDocLine("@ApiModelProperty(value = \""+introspectedColumn.getRemarks()+"\")");
+		}else{
+			field.addJavaDocLine("@ApiModelProperty(value = \"\")");
 		}
 	}
 
@@ -40,23 +42,23 @@ public class GenCommentGenerator implements CommentGenerator {
 	 */
 	@Override
 	public void addGetterComment(Method method, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-		StringBuilder sb = new StringBuilder();
-		method.addJavaDocLine("/**");
-		if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
-			sb.append(" * 获取");
-			sb.append(introspectedColumn.getRemarks());
-			method.addJavaDocLine(sb.toString());
-			method.addJavaDocLine(" *");
-		}
-		sb.setLength(0);
-		sb.append(" * @return ");
-		sb.append(introspectedColumn.getActualColumnName());
-		if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
-			sb.append(" - ");
-			sb.append(introspectedColumn.getRemarks());
-		}
-		method.addJavaDocLine(sb.toString());
-		method.addJavaDocLine(" */");
+//		StringBuilder sb = new StringBuilder();
+//		method.addJavaDocLine("/**");
+//		if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
+//			sb.append(" * 获取");
+//			sb.append(introspectedColumn.getRemarks());
+//			method.addJavaDocLine(sb.toString());
+//			method.addJavaDocLine(" *");
+//		}
+//		sb.setLength(0);
+//		sb.append(" * @return ");
+//		sb.append(introspectedColumn.getActualColumnName());
+//		if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
+//			sb.append(" - ");
+//			sb.append(introspectedColumn.getRemarks());
+//		}
+//		method.addJavaDocLine(sb.toString());
+//		method.addJavaDocLine(" */");
 	}
 
 	/**
@@ -67,24 +69,24 @@ public class GenCommentGenerator implements CommentGenerator {
 	 */
 	@Override
 	public void addSetterComment(Method method, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-		StringBuilder sb = new StringBuilder();
-		method.addJavaDocLine("/**");
-		if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
-			sb.append(" * 设置");
-			sb.append(introspectedColumn.getRemarks());
-			method.addJavaDocLine(sb.toString());
-			method.addJavaDocLine(" *");
-		}
-		Parameter parm = method.getParameters().get(0);
-		sb.setLength(0);
-		sb.append(" * @param ");
-		sb.append(parm.getName());
-		if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
-			sb.append(" ");
-			sb.append(introspectedColumn.getRemarks());
-		}
-		method.addJavaDocLine(sb.toString());
-		method.addJavaDocLine(" */");
+//		StringBuilder sb = new StringBuilder();
+//		method.addJavaDocLine("/**");
+//		if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
+//			sb.append(" * 设置");
+//			sb.append(introspectedColumn.getRemarks());
+//			method.addJavaDocLine(sb.toString());
+//			method.addJavaDocLine(" *");
+//		}
+//		Parameter parm = method.getParameters().get(0);
+//		sb.setLength(0);
+//		sb.append(" * @param ");
+//		sb.append(parm.getName());
+//		if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
+//			sb.append(" ");
+//			sb.append(introspectedColumn.getRemarks());
+//		}
+//		method.addJavaDocLine(sb.toString());
+//		method.addJavaDocLine(" */");
 	}
 
 	/**
@@ -121,6 +123,9 @@ public class GenCommentGenerator implements CommentGenerator {
 	public void addFieldComment(Field field, IntrospectedTable introspectedTable) {
 	}
 
+	/**
+	 * 类上的注释
+	 */
 	@Override
 	public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 

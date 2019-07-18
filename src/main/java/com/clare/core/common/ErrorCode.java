@@ -1,4 +1,4 @@
-package com.clare.util;
+package com.clare.core.common;
 
 import java.util.HashMap;
 import java.util.Map;
