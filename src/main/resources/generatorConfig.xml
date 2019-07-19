@@ -16,7 +16,7 @@
 
         <!-- 通过自定义插件类生成自定义注解和接口 -->
         <plugin type="com.clare.util.generator.GenPlugin">
-            <property name="mappers" value="com.clare.core.dao.BaseMapper" />
+            <property name="mappers" value="com.clare.core.mapper.MybatisBaseMapper" />
         </plugin>
 
         <commentGenerator>
@@ -30,11 +30,11 @@
                         userId="${spring.datasource.username}"
                         password="${spring.datasource.password}"/>
         <!-- 生成实体类配置 -->
-        <javaModelGenerator targetPackage="com.clare.pojo" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.clare.po" targetProject="src/main/java"/>
         <!-- 生成映射文件配置 -->
         <sqlMapGenerator targetPackage="com.clare.mapper" targetProject="src/main/resources"/>
         <!-- 生成映射接口配置 -->
-        <javaClientGenerator targetPackage="com.clare.dao" targetProject="src/main/java" type="XMLMAPPER"/>
+        <javaClientGenerator targetPackage="com.clare.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
         <table tableName="user">
             <!--mysql 配置 -->

@@ -71,7 +71,7 @@ public class GenPlugin extends PluginAdapter {
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine(" * ");
         topLevelClass.addJavaDocLine(" * @author : zhangHao");
-        topLevelClass.addJavaDocLine(" * @data : "+getDate());
+        topLevelClass.addJavaDocLine(" * @data : " + getDate());
         topLevelClass.addJavaDocLine("*/");
 
         return true;
@@ -101,18 +101,30 @@ public class GenPlugin extends PluginAdapter {
      */
     @Override
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-         // 获取实体类
-         FullyQualifiedJavaType entityType = new
-         FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
-         // import接口
-         for (String mapper : mappers)
-         {
-         interfaze.addImportedType(new FullyQualifiedJavaType(mapper));
-         interfaze.addSuperInterface(new FullyQualifiedJavaType(mapper + "<" +
-         entityType.getShortName() + ">"));
-         }
-         // import实体类
-         interfaze.addImportedType(entityType);
+        // 获取实体类
+        FullyQualifiedJavaType entityType = new
+                FullyQualifiedJavaType(introspectedTable.getBaseRecordType());
+        // import接口
+        for (String mapper : mappers) {
+            interfaze.addImportedType(new FullyQualifiedJavaType(mapper));
+            interfaze.addSuperInterface(new FullyQualifiedJavaType(mapper + "<" +
+                    entityType.getShortName() + ">"));
+        }
+        // import实体类
+        interfaze.addImportedType(entityType);
+
+        FullyQualifiedJavaType javaType = new FullyQualifiedJavaType("org.springframework.stereotype.Repository");
+        interfaze.addImportedType(javaType);
+
+        //注解
+        interfaze.addAnnotation("@Repository");
+        //注释
+        interfaze.addJavaDocLine("/**");
+        interfaze.addJavaDocLine(" * ");
+        interfaze.addJavaDocLine(" * @author : zhangHao");
+        interfaze.addJavaDocLine(" * @data : " + getDate());
+        interfaze.addJavaDocLine("*/");
+
         return true;
     }
 
@@ -177,7 +189,7 @@ public class GenPlugin extends PluginAdapter {
         return false;
     }
 
-    private String getDate(){
+    private String getDate() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String result = format.format(new Date());
         return result;

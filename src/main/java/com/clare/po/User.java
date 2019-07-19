@@ -1,4 +1,4 @@
-package com.clare.pojo;
+package com.clare.po;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -8,7 +8,7 @@ import lombok.Data;
 /**
  * 
  * @author : zhangHao
- * @data : 2019-07-18 20:11
+ * @data : 2019-07-19 14:33
 */
 @Data
 @Table
