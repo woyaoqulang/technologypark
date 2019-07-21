@@ -34,19 +34,27 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <!--html静态模版-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <!--连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>1.1.10</version>
         </dependency>
-        <!--html静态模版-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+
         <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
@@ -80,7 +88,8 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
+        <!--日志  springboot自带可以不用加依赖-->
+       <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
@@ -103,7 +112,7 @@
             <artifactId>swagger-bootstrap-ui</artifactId>
             <version>1.9.3</version>
         </dependency>
-
+        <!--commons-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -115,6 +124,14 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+
+
 
     </dependencies>
     <build>

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @CommonsLog
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
-    @Override
+    /*@Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("\n\n拦截器开始");
         String token = request.getHeader("token");
@@ -25,5 +25,5 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         //
 
         return super.preHandle(request, response, handler);
-    }
+    }*/
 }
