@@ -90,5 +90,6 @@ buildNumber.properties
 .classpath
 .settings
 .metadata
-
 *.iml
+src/test/
+

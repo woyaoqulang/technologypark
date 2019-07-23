@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 @CommonsLog
 public class UserController {
 
-    @Autowired
-    private UserMapper userMapper;
 
     @ApiOperation("")
     @GetMapping("/getUser")
