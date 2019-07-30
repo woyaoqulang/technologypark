@@ -1,5 +1,6 @@
 package com.clare.interceptor;
 
+import com.clare.util.CookieUtils;
 import lombok.extern.apachecommons.CommonsLog;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("\n\n拦截器开始");
         String token = request.getHeader("token");
+        //CookieUtils
+
         log.info("token:"+token);
 
 
