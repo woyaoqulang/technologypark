@@ -1,6 +1,5 @@
 package com.clare.config;
 
-import ch.qos.logback.classic.turbo.TurboFilter;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -15,6 +14,11 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.lang.reflect.Method;
 
+/**
+ * redis连接
+ * @author zhangHao
+ * @date 2019-07-31 14:55
+ */
 @Configuration
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
