@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
 
-    @ApiOperation("")
-    @GetMapping("/getUser")
+    @ApiOperation("登陆")
+    @GetMapping("/login")
     public User getUser(){
         User user = new User();
 

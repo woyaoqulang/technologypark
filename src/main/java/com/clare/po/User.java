@@ -6,9 +6,9 @@ import javax.persistence.Table;
 import lombok.Data;
 
 /**
- * 
+ * 用户表
  * @author : zhangHao
- * @data : 2019-07-19 14:33
+ * @data : 2019-07-31 19:28
 */
 @Data
 @Table
@@ -36,4 +36,10 @@ public class User {
 
     @ApiModelProperty(value = "修改时间")
     private Date updateTime;
+
+    @ApiModelProperty(value = "注册途径")
+    private Integer source;
+
+    @ApiModelProperty(value = "身份")
+    private Integer role;
 }
