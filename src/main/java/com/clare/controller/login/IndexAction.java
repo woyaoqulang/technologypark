@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexAction {
 
     @RequestMapping({"/","/technology/index"})
-    public String index(){
+    public String lteLogin(){
         return "login";
+    }
+
+    @RequestMapping("/layui")
+    public String layuiLogin(){
+        return "index";
     }
 
 
