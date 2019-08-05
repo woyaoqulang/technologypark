@@ -15,7 +15,7 @@ public class IndexAction {
 
     @RequestMapping({"/","/technology/index"})
     public String lteLogin(){
-        return "login";
+        return "adminIndex";
     }
 
     @RequestMapping("/layui")
