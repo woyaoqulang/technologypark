@@ -24,6 +24,24 @@
             background-image: url("/adminLTE/dist/img/photo1.png");
             background-size: 100%;
         }
+        .verifyCode {
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            float: left;
+            font-size: 15px;
+            height: 37px;
+            padding-left: 15px;
+            width:180px;
+        }
+        .verifyCodeImg img{
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            height: 37px;
+            float: right;
+            cursor: pointer;
+        }
+        .mb30{margin-bottom:30px;}
+        .mt10{margin-top:10px;}
     </style>
 </head>
 <body class="hold-transition hao-login-body">
@@ -33,17 +51,27 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
-        <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="手机号/用户名/邮箱">
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-        </div>
-        <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="密码">
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-        </div>
+        <p class="login-box-msg"></p>
+        <form class="">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="手机号/用户名/邮箱">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="密码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group">
+                <input type="text" id="verifyCode" class="verifyCode"
+                       placeholder="输入识别码">
+                <div class="verifyCodeImg topfit-ub-click" data-ub-control="验证码">
+                    <img id="imgCode" src="/japi/verify_code?width=180&height=50&type=4"
+                         title="点击切换验证码" />
+                </div>
+            </div>
+        </form>
         <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-8 mt10">
                 <div class="checkbox icheck">
                     <label>
                         <input type="checkbox"><span class="h5" style="margin-top: 0px">&nbsp;记住密码</span>
@@ -51,14 +79,13 @@
                 </div>
             </div>
             <!-- /.col -->
-            <div class="col-xs-4">
+            <div class="col-xs-4 mt10">
                 <button type="submit" class="btn btn-primary btn-block btn-flat">登陆</button>
             </div>
             <!-- /.col -->
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <br>
+            <div class="col-md-5 col-md-offset-7 text-right">
                 <a href="#">忘记密码</a>&nbsp;
                 <a href="register.html" class="text-center">注册</a>
             </div>
@@ -66,9 +93,9 @@
         <!-- /.social-auth-links -->
         <div class="row">
             <div class="col-md-12">其他方式登陆：
-                <a class="btn btn-social-icon btn-bitbucket"><i class="fa fa-weixin"></i></a>
-                <a class="btn btn-social-icon btn-dropbox"><i class="fa fa-qq"></i></a>
-                <a class="btn btn-social-icon btn-facebook"><i class="fa fa-weibo"></i></a>
+                <a class="btn btn-social-icon"><i class="fa fa-weixin"></i></a>
+                <a class="btn btn-social-icon"><i class="fa fa-qq"></i></a>
+                <a class="btn btn-social-icon "><i class="fa fa-weibo"></i></a>
             </div>
         </div>
     </div>
@@ -86,11 +113,17 @@
 <script src="/js/respond.min.js"></script>
 <script>
     $(function () {
+        $('#imgCode').click(function(){
+            $("#imgCode").attr("src", "/japi/verify_code?width=180&height=50&type=4&" + Date.parse(new Date()));
+        })
+
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' /* optional */
         });
+
+
     });
 </script>
 </body>

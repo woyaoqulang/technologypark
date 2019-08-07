@@ -21,9 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         log.info("\n\n拦截器开始");
         String token = request.getHeader("token");
         //CookieUtils
-
         log.info("token:" + token);
-
 
         return super.preHandle(request, response, handler);
     }
