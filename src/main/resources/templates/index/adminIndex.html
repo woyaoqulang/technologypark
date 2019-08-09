@@ -7,21 +7,21 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" th:href="@{/adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
     <!-- Font Awesome -->
-    <link rel="stylesheet" th:href="@{/adminLTE/bower_components/font-awesome/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/adminLTE/bower_components/font-awesome/css/font-awesome.min.css}"/>
     <!-- Ionicons -->
-    <link rel="stylesheet" th:href="@{/adminLTE/bower_components/Ionicons/css/ionicons.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/adminLTE/bower_components/Ionicons/css/ionicons.min.css}"/>
     <!-- Theme style -->
-    <link rel="stylesheet" th:href="@{/adminLTE/dist/css/AdminLTE.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/adminLTE/dist/css/AdminLTE.min.css}"/>
     <!-- iCheck -->
-    <link rel="stylesheet" th:href="@{/adminLTE/plugins/iCheck/square/blue.css}"/>
+    <link rel="stylesheet" th:href="@{/static/adminLTE/plugins/iCheck/square/blue.css}"/>
     <!-- Google Font -->
-    <link rel="stylesheet" th:href="@{/css/googleapis.css}">
+    <link rel="stylesheet" th:href="@{/static/css/googleapis.css}">
     <style>
         .hao-login-body {
             height: auto;
-            background-image: url("/adminLTE/dist/img/photo1.png");
+            background-image: url("/static/adminLTE/dist/img/photo1.png");
             background-size: 100%;
         }
         .verifyCode {
@@ -87,7 +87,7 @@
         <div class="row">
             <div class="col-md-5 col-md-offset-7 text-right">
                 <a href="#">忘记密码</a>&nbsp;
-                <a href="register.html" class="text-center">注册</a>
+                <a href="/technology/" class="text-center">注册</a>
             </div>
         </div>
         <!-- /.social-auth-links -->
@@ -104,13 +104,13 @@
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="/adminLTE/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/static/adminLTE/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="/adminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/adminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="/adminLTE/plugins/iCheck/icheck.min.js"></script>
-<script src="/js/html5shiv.min.js"></script>
-<script src="/js/respond.min.js"></script>
+<script src="/static/adminLTE/plugins/iCheck/icheck.min.js"></script>
+<script src="/static/js/html5shiv.min.js"></script>
+<script src="/static/js/respond.min.js"></script>
 <script>
     $(function () {
         $('#imgCode').click(function(){
