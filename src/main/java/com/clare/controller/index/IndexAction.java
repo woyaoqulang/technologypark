@@ -1,4 +1,4 @@
-package com.clare.controller.login;
+package com.clare.controller.index;
 
 
 import org.springframework.stereotype.Controller;
@@ -13,10 +13,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class IndexAction {
 
+    /**
+     * 登陆页
+     * @author zhanghao
+     * @date 2019/8/16 15:45
+     * @return
+    **/
     @RequestMapping({"/","/technology/index"})
     public String lteLogin(){
-        return "adminIndex";
+        return "/index/adminIndex";
     }
+    
+    /**
+     * 注册
+     * @author zhanghao
+     * @date 2019/8/16 16:30
+     * @return 
+    **/        
+    @RequestMapping("/technology/register")
+    public String register(){
+        return "/index/register";
+    }
+
 
     @RequestMapping("/layui")
     public String layuiLogin(){

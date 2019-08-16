@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>注册</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta th:replace="common/header">
+</head>
+<body class="hold-transition hao-login-body">
+<div class="register-box">
+  <div class="login-logo">
+    <a href="#"><b>Technology Park</b></a>
+  </div>
+
+  <div class="register-box-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="userName" placeholder="">
+        </div>
+       <div class="col-sm-3">
+         <label for="userName" class="control-label text-justify">用户名</label>
+       </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-9">
+          <input type="password" class="form-control" id="password" placeholder="">
+        </div>
+        <div class="col-sm-3">
+          <label for="password" class=" control-label text-justify">密码</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-9">
+          <input type="password" class="form-control" id="confirmPassword" placeholder="">
+        </div>
+        <div class="col-sm-3">
+          <label for="confirmPassword" class=" control-label ">确认密码</label>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="密码">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="校验密码">
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="邮箱">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+    <a href="login.html" class="text-center">I already have a membership</a>
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' /* optional */
+    });
+  });
+</script>
+</body>
+</html>

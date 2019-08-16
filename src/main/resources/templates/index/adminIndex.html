@@ -6,43 +6,7 @@
     <title>technologypark</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" th:href="@{/static/adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css}"/>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" th:href="@{/static/adminLTE/bower_components/font-awesome/css/font-awesome.min.css}"/>
-    <!-- Ionicons -->
-    <link rel="stylesheet" th:href="@{/static/adminLTE/bower_components/Ionicons/css/ionicons.min.css}"/>
-    <!-- Theme style -->
-    <link rel="stylesheet" th:href="@{/static/adminLTE/dist/css/AdminLTE.min.css}"/>
-    <!-- iCheck -->
-    <link rel="stylesheet" th:href="@{/static/adminLTE/plugins/iCheck/square/blue.css}"/>
-    <!-- Google Font -->
-    <link rel="stylesheet" th:href="@{/static/css/googleapis.css}">
-    <style>
-        .hao-login-body {
-            height: auto;
-            background-image: url("/static/adminLTE/dist/img/photo1.png");
-            background-size: 100%;
-        }
-        .verifyCode {
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            float: left;
-            font-size: 15px;
-            height: 37px;
-            padding-left: 15px;
-            width:180px;
-        }
-        .verifyCodeImg img{
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            height: 37px;
-            float: right;
-            cursor: pointer;
-        }
-        .mb30{margin-bottom:30px;}
-        .mt10{margin-top:10px;}
-    </style>
+    <meta th:replace="common/header">
 </head>
 <body class="hold-transition hao-login-body">
 <div class="login-box">
@@ -87,7 +51,7 @@
         <div class="row">
             <div class="col-md-5 col-md-offset-7 text-right">
                 <a href="#">忘记密码</a>&nbsp;
-                <a href="/technology/" class="text-center">注册</a>
+                <a href="/technology/register" class="text-center">注册</a>
             </div>
         </div>
         <!-- /.social-auth-links -->
@@ -101,16 +65,6 @@
     </div>
     <!-- /.login-box-body -->
 </div>
-<!-- /.login-box -->
-
-<!-- jQuery 3 -->
-<script src="/static/adminLTE/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="/static/adminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="/static/adminLTE/plugins/iCheck/icheck.min.js"></script>
-<script src="/static/js/html5shiv.min.js"></script>
-<script src="/static/js/respond.min.js"></script>
 <script>
     $(function () {
         $('#imgCode').click(function(){
