@@ -1,4 +1,4 @@
-package com.clare.core.pojo;
+package com.clare.core.model;
 
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;

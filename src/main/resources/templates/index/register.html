@@ -16,54 +16,65 @@
 
   <div class="register-box-body">
     <form class="form-horizontal">
-      <div class="form-group">
-        <div class="col-sm-9">
-          <input type="text" class="form-control" id="userName" placeholder="">
-        </div>
-       <div class="col-sm-3">
-         <label for="userName" class="control-label text-justify">用户名</label>
-       </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-9">
-          <input type="password" class="form-control" id="password" placeholder="">
+      <div class="form-group js-userName">
+        <div class="col-sm-9 ">
+          <input type="text" class="form-control" maxlength="12" minlength="6" name="userName"
+                 placeholder="6-12位字母或数字">
+          <span class="zh-help-block none"></span>
         </div>
         <div class="col-sm-3">
-          <label for="password" class=" control-label text-justify">密码</label>
+          <label class="control-label text-justify">用户名</label>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group js-password">
         <div class="col-sm-9">
-          <input type="password" class="form-control" id="confirmPassword" placeholder="">
+          <input type="password" class="form-control" maxlength="12" minlength="6" name="password"
+                 placeholder="6-12位字母或数字,首位为字母">
+          <span class="zh-help-block none"></span>
         </div>
         <div class="col-sm-3">
-          <label for="confirmPassword" class=" control-label ">确认密码</label>
+          <label class=" control-label text-justify">密码</label>
         </div>
       </div>
-
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="密码">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      <div class="form-group js-confirmPassword">
+        <div class="col-sm-9">
+          <input type="password" class="form-control" maxlength="12" minlength="6" name="confirmPassword"
+                 placeholder="确认密码">
+          <span class="zh-help-block none"></span>
+        </div>
+        <div class="col-sm-3">
+          <label class=" control-label ">确认密码</label>
+        </div>
       </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="校验密码">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      <div class="form-group js-phone">
+        <div class="col-sm-9">
+          <input type="password" class="form-control" name="phone" placeholder="手机号">
+          <span class="zh-help-block none"></span>
+        </div>
+        <div class="col-sm-3">
+          <label class=" control-label">手机号</label>
+        </div>
       </div>
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="邮箱">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      <div class="form-group js-email">
+        <div class="col-sm-9">
+          <input type="password" class="form-control" name="email" placeholder="邮箱">
+          <span class="zh-help-block none"></span>
+        </div>
+        <div class="col-sm-3">
+          <label class=" control-label ">邮箱</label>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-8">
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
+          <button type="button" class="btn btn-primary btn-block btn-flat js-register">注册</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
-    <a href="login.html" class="text-center">I already have a membership</a>
+    <a href="/technology/index" class="text-center">已注册账号，去登陆</a>
   </div>
   <!-- /.form-box -->
 </div>
@@ -75,6 +86,63 @@
       radioClass: 'iradio_square-blue',
       increaseArea: '20%' /* optional */
     });
+
+    $('input').on('click', function () {
+      var _parent = $(this).parents('.form-group');
+      if (_parent.hasClass('has-warning')) {
+        _parent.removeClass('has-warning');
+        _parent.find('.zh-help-block').hide();
+      }
+
+    });
+
+    $('.js-register').on('click', function () {
+      loginIn();
+    })
+
+    function loginIn() {
+      var userName = $('input[name="userName"]').val();
+      if (!userName) {
+        $('.js-userName').addClass('has-warning').find('.zh-help-block').html('用户名不能为空').show();
+        return false;
+      }
+      var password = $('input[name="password"]').val();
+      if (!password) {
+        $('.js-password').addClass('has-warning').find('.zh-help-block').html('密码不能为空').show();
+        return false;
+      }
+      var confirmPassword = $('input[name="confirmPassword"]').val();
+      if (!confirmPassword) {
+        $('.js-confirmPassword').addClass('has-warning').find('.zh-help-block').html('密码不能为空').show();
+        return false;
+      }
+      if (password != confirmPassword) {
+        $('.js-confirmPassword').addClass('has-warning').find('.zh-help-block').html('密码不一致').show();
+      }
+      var phone = $('input[name="phone"]').val();
+      if (!phone) {
+        $('.js-phone').addClass('has-warning').find('.zh-help-block').html('手机号不能为空').show();
+        return false;
+      }
+      var email = $('input[name="email"]').val();
+      if (!email) {
+        $('.js-email').addClass('has-warning').find('.zh-help-block').html('邮箱不能为空').show();
+        return false;
+      }
+      var data={
+        userName:userName,
+        password:password,
+        phone:phone,
+        email:email
+      }
+      Ajax.post('',data,function(){
+
+      },function(){
+
+      })
+    }
+
+
   });
 </script>
 </body>
