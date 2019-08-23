@@ -23,6 +23,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         //CookieUtils
         log.info("token:" + token);
 
-        return super.preHandle(request, response, handler);
+        return true;
     }
 }
