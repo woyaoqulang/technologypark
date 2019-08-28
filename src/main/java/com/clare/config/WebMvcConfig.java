@@ -24,10 +24,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/api/**");
     }
 
-    @Override
+   /* @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // addResourceLocations指的是文件放置的目录，addResourceHandler指的是对外暴露的访问路径
-     /*   registry.addResourceHandler("swagger-ui.html")
+     *//*   registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
 
         registry.addResourceHandler("/webjars/**")
@@ -37,8 +37,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/swagger-resources/");
 
         registry.addResourceHandler("/swagger/**")
-                .addResourceLocations("classpath:/META-INF/resources/swagger*");*/
+                .addResourceLocations("classpath:/META-INF/resources/swagger*");*//*
 
-    }
+    }*/
 
 }

@@ -31,11 +31,11 @@ public final class StringUtil extends StringUtils {
     static final Pattern userNamePt = Pattern.compile("^lv[0-9]{11}$");
     static final Pattern pinyinPattern = Pattern.compile("([a-z|A-Z]*)");
     static final Pattern datePattern = Pattern.compile("^((\\d{2}(([02468][048])|([13579][26]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\\s(((0?[0-9])|([1-2][0-3]))\\:([0-5]?[0-9])((\\s)|(\\:([0-5]?[0-9])))))?$");
+    static final Pattern emailPattern = Pattern.compile("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
+    static final Pattern phonePattern = Pattern.compile("^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\\d{8}$");
     private static final Log log = LogFactory.getLog(StringUtil.class);
     public static final int toLowerCase = 1;
     public static final int toUpperCase = 2;
-    private static final String MOBILE_REG = "^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\\d{8}$";
-    private static final String EMAIL_REG = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
     private static final String RANDOM_STRING_POOL = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
     private static final Random RANDOM = new Random();
 
@@ -298,8 +298,7 @@ public final class StringUtil extends StringUtils {
         if (isEmpty(mobile)) {
             return false;
         } else {
-            Pattern pattern = Pattern.compile("^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\\d{8}$");
-            return pattern.matcher(mobile).matches();
+            return phonePattern.matcher(mobile).matches();
         }
     }
 
@@ -307,8 +306,7 @@ public final class StringUtil extends StringUtils {
         if (isEmpty(email)) {
             return false;
         } else {
-            Pattern pattern = Pattern.compile("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
-            return pattern.matcher(email).matches();
+            return emailPattern.matcher(email).matches();
         }
     }
 
@@ -384,8 +382,7 @@ public final class StringUtil extends StringUtils {
         if (isBlank(source)) {
             return "";
         } else {
-            Pattern pattern = Pattern.compile("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
-            if (pattern.matcher(source).matches()) {
+            if (emailPattern.matcher(source).matches()) {
                 int splitIndex = source.indexOf("@");
                 String emailPrefix = source.substring(0, splitIndex);
                 if (emailPrefix.length() > 4) {
@@ -501,10 +498,8 @@ public final class StringUtil extends StringUtils {
     public static String realplayMobleAndEmail(String str) {
         try {
             String s = str;
-            Pattern p = Pattern.compile("^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\\d{8}$");
-            Pattern p2 = Pattern.compile("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
-            Matcher m2 = p2.matcher(str);
-            Matcher m = p.matcher(str);
+            Matcher m2 = emailPattern.matcher(str);
+            Matcher m = phonePattern.matcher(str);
             if (str.length() == 11 && m.find()) {
                 String st = str.substring(0, 7);
                 s = st + "****";

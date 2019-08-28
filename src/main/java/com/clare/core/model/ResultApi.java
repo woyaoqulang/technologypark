@@ -6,7 +6,11 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.List;
-
+/**
+ * 统一返回结果对象
+ * @author zhanghao
+ * @date 2019/8/28 17:05
+**/
 @ApiModel("返回的统一结果")
 public class ResultApi<T> extends Object implements Serializable {
 
@@ -64,7 +68,7 @@ public class ResultApi<T> extends Object implements Serializable {
     }
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
-        this.errorMessage = ErrorCode.errorMap.get(errorCode);
+        //this.errorMessage = ErrorCode.errorMap.get(errorCode);
     }
 
     public Object getErrorMessage() {

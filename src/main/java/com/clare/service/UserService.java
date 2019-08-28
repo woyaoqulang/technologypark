@@ -23,6 +23,7 @@ public class UserService {
     **/
     public List<User> getUserInfoList() {
         List<User> users = userMapper.selectAll();
+        int a=10/0;
         return users;
     }
 }
