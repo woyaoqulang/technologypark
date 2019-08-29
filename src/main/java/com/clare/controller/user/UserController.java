@@ -1,6 +1,7 @@
 package com.clare.controller.user;
 
 
+import com.clare.core.common.BaseController;
 import com.clare.core.model.ResultApi;
 import com.clare.mapper.UserMapper;
 import com.clare.po.User;
@@ -25,7 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/technology")
 @CommonsLog
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;

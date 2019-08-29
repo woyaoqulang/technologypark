@@ -2,9 +2,13 @@ package com.clare.core.common;
 
 import com.clare.core.model.ResultApi;
 import com.clare.core.model.ResultApiBuilder;
+import com.clare.core.util.ServletUtil;
 import com.clare.core.util.StringUtil;
+import com.clare.core.web.RequestContext;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -16,10 +20,14 @@ public class BaseController {
 
 
     @ExceptionHandler({Exception.class})
-    public ResultApi<String> exception(){
-        
-        return null;
+    public ResultApi<String> exception(Exception exception){
+        String message = exception.getMessage();
+        Map<String, String>[] requestInfoMap = ServletUtil.getClientInfoStat(this.request());
+        System.out.println(requestInfoMap);
+        return this.respond500("Server Error");
     }
+
+
     protected <T> ResultApi<T> respond500(Object errorMessage) {
         return ResultApiBuilder.buildResultApi("500", errorMessage);
     }
@@ -33,10 +41,14 @@ public class BaseController {
         if (StringUtil.isNotEmpty(errorMessage) && errorMessage.contains("java.io.IOException: Broken pipe")) {
             return true;
         } else {
-            //Map<String, String>[] requestInfoMap = StringUtil.getClientInfoStat(this.request());
+            Map<String, String>[] requestInfoMap = ServletUtil.getClientInfoStat(this.request());
             //this.sendExceptionInfo(requestInfoMap, exception);
             return false;
         }
+    }
+
+    protected HttpServletRequest request() {
+        return RequestContext.getRequest();
     }
 
 

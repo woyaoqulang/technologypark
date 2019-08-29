@@ -1,6 +1,7 @@
 package com.clare.config;
 
 import com.clare.interceptor.LoginInterceptor;
+import com.clare.interceptor.SystemInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -13,13 +14,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     private LoginInterceptor interceptor;
 
+    @Autowired
+    private SystemInterceptor systemInterceptor;
+
     /**
      * 添加拦截器
-     *
      * @param registry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(systemInterceptor).addPathPatterns("/**");
         registry.addInterceptor(interceptor).addPathPatterns("/**")
                 .excludePathPatterns("/api/**");
     }
