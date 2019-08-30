@@ -18,11 +18,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("\n\n拦截器开始");
+        log.info("\n登录拦截器开始");
         String token = request.getHeader("token");
         //CookieUtils
         log.info("token:" + token);
-
         return true;
     }
 }

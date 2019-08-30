@@ -23,6 +23,12 @@ public class RequestContext {
     private Pageable pageable;
     private Object handler;
 
+    /**
+     * 初始化上下文
+     * @author zhanghao
+     * @date 2019/8/30 14:23
+     * @return
+    **/
     public static RequestContext start(HttpServletRequest request, HttpServletResponse response)
     {
 
@@ -59,4 +65,46 @@ public class RequestContext {
     private HttpServletRequest _getRequest() {
         return request;
     }
+
+    public void clearContext() {
+        this.request = null;
+        this.response = null;
+        this.session = null;
+        this.cookies = null;
+        this.model = null;
+        this.pageable = null;
+        this.handler = null;
+        contextThreadLocal.remove();
+    }
+
+    public static Model getModel() {
+        RequestContext requestContext = get();
+        return requestContext == null ? null : requestContext._getModel();
+    }
+
+    private Model _getModel() {
+        return this.model;
+    }
+
+    public static HttpServletResponse getResponse() {
+        RequestContext requestContext = get();
+        return requestContext == null ? null : requestContext._getResponse();
+    }
+
+    private HttpServletResponse _getResponse() {
+        return this.response;
+    }
+
+    public void setModel(Model model) {
+        RequestContext requestContext = (RequestContext)contextThreadLocal.get();
+        if (requestContext != null) {
+            requestContext._setModel(model);
+            contextThreadLocal.set(requestContext);
+        }
+    }
+
+    private void _setModel(Model model) {
+        this.model = model;
+    }
+
 }

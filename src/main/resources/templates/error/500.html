@@ -20,7 +20,7 @@
   <script src="/js/html5shiv.min.js"></script>
   <script src="/js/respond.min.js"></script>
   <!-- Google Font -->
-  <link rel="stylesheet" th:href="@{/css/googleapis.css}">
+  <link rel="stylesheet" href="/css/googleapis.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="">
@@ -29,6 +29,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
+        <!--/*@thymesVar id="error" type=""*/-->
+        <span th:text="${error}">未知</span>
         500 Error Page
       </h1>
       <ol class="breadcrumb">
