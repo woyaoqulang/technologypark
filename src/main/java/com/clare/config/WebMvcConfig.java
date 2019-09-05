@@ -3,10 +3,16 @@ package com.clare.config;
 import com.clare.interceptor.LoginInterceptor;
 import com.clare.interceptor.SystemInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.ArrayList;
 
 /**
  * springmvc配置
@@ -33,21 +39,34 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/api/**");
     }
 
-   /* @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // addResourceLocations指的是文件放置的目录，addResourceHandler指的是对外暴露的访问路径
-     *//*   registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
 
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    /**
+     * 跨域配置
+     * @return
+     */
+    @Bean
+    public FilterRegistrationBean corsFilter(){
+        CorsConfiguration configuration = new CorsConfiguration();
+        //设置允许凭证
+        configuration.setAllowCredentials(true);
+        //来源
+        ArrayList<String> origins = new ArrayList<>();
+        origins.add("*");
+        origins.add("null");
+        configuration.setAllowedOrigins(origins);
+        //头信息
+        ArrayList<String> headers = new ArrayList<>();
+        headers.add("*");
+        configuration.setAllowedHeaders(headers);
+        //方法
+        ArrayList<String> methods = new ArrayList<>();
+        methods.add("*");
+        configuration.setAllowedMethods(methods);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**",configuration);
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new CorsFilter(source));
+        return filterRegistrationBean;
+    }
 
-        registry.addResourceHandler("/swagger-resources/**")
-                .addResourceLocations("classpath:/META-INF/resources/swagger-resources/");
-
-        registry.addResourceHandler("/swagger/**")
-                .addResourceLocations("classpath:/META-INF/resources/swagger*");*//*
-
-    }*/
 
 }

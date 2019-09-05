@@ -40,12 +40,65 @@
        <!-- <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <MaxFileSize>10MB</MaxFileSize>
         </triggeringPolicy>-->
-
     </appender>
+
+    <!--  邮件 -->
+    <!-- SMTP server的地址，必需指定。如网易的SMTP服务器地址是： smtp.163.com、smtp.qq.com -->
+    <property name="smtpHost" value="smtp.qq.com"/>
+    <!-- SMTP server的端口地址。默认值：25 -->
+    <property name="smtpPort" value="25"/>
+    <!-- 发送邮件账号，默认为null -->
+    <property name="username" value="1679619459@qq.com"/>
+    <!-- 发送邮件密码（此密码为邮箱的客户端授权密码，不是邮箱登录密码，邮箱需要开启POP3/SMTP服务、IMAP/SMTP服务才可使用） -->
+    <property name="password" value="vhtgloywsaszcebd"/>
+    <!-- 如果设置为true，appender将会使用SSL连接到日志服务器。默认值：false -->
+    <property name="SSL" value="true"/>
+    <!-- 指定发送到那个邮箱，可设置多个<to>属性，指定多个目的邮箱 -->
+    <property name="email_to" value="z1679619459@163.com"/><!--收件人账号多个可以逗号隔开-->
+    <!-- 指定发件人名称。如果设置成“&lt;ADMIN&gt; ”，则邮件发件人将会是“<ADMIN> ” -->
+    <property name="email_from" value="1679619459@qq.com" />
+    <!-- 指定emial的标题，它需要满足PatternLayout中的格式要求。如果设置成“Log: %logger - %msg ”，就案例来讲，则发送邮件时，标题为“【Error】: com.foo.Bar - Hello World ”。 默认值："%logger{20} - %m". -->
+    <property name="email_subject" value="【${appName}】:%msg"/>
+
+    <appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+        <smtpHost>${smtpHost}</smtpHost>
+        <!--大坑,没配置端口，导致使用的默认25端口，而25端口在阿里云上是封锁的-->
+        <smtpPort>${smtpPort}</smtpPort>
+        <username>${username}</username>
+        <password>${password}</password>
+        <SSL>${SSL}</SSL>
+        <asynchronousSending>false</asynchronousSending>
+        <to>${email_to}</to>
+        <from>${email_from}</from>
+        <subject>${email_subject}</subject>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--日志输出格式：%d表示日期时间，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %logger{50} 表示logger名字最长50个字符，否则按照句点分割。 %msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} 【${appName}】 [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </layout>
+        <!--<layout class="ch.qos.logback.classic.html.HTMLLayout">
+            <Pattern>%date%level%thread%logger{0}%line%message</Pattern>
+        </layout>-->
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
+                <expression>
+                    if(level > WARN) {
+                    return true;
+                    }
+                    return false;
+                </expression>
+            </evaluator>
+            <!-- 这里采用等级过滤器，指定等级相符才发送，这里指定ERROR级别才发送 -->
+            <!--   <level>ERROR</level>-->
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
 
     <!-- 日志输出级别 -->
     <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
+        <appender-ref ref="EMAIL" />
     </root>
 </configuration>
