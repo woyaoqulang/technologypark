@@ -81,7 +81,7 @@ public class BaseController {
     }
 
     public void sendExceptionInfo(Map<String, String>[] requestInfoMap, Exception ex) {
-        ex.printStackTrace();
+        log.error("系统异常," + ex.getMessage(), ex);
     }
 
     private void handException(Exception exception, boolean isAssert) throws Exception {
@@ -95,7 +95,6 @@ public class BaseController {
         } else {
             model.addAttribute("_error", exception.getMessage());
         }
-        log.error("系统异常," + exception.getMessage(), exception);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("error",exception.getMessage());
         String content = TemplatesUtil.createTemplates(hashMap, "error/500", templateEngine);
