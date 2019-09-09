@@ -1,4 +1,4 @@
-package com.clare.core.mapper;
+package com.clare.core.model;
 
 import tk.mybatis.mapper.common.BaseMapper;
 

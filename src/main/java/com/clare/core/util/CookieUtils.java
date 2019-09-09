@@ -1,4 +1,4 @@
-package com.clare.util;
+package com.clare.core.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

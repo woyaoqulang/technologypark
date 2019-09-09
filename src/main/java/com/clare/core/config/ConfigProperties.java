@@ -1,4 +1,4 @@
-package com.clare.core.common;
+package com.clare.core.config;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Value;

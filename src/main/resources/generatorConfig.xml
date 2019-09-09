@@ -16,7 +16,7 @@
 
         <!-- 通过自定义插件类生成自定义注解和接口 -->
         <plugin type="com.clare.util.generator.GenPlugin">
-            <property name="mappers" value="com.clare.core.mapper.MybatisBaseMapper" />
+            <property name="mappers" value="com.clare.core.model.MybatisBaseMapper" />
         </plugin>
 
         <commentGenerator>

@@ -14,6 +14,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 */
 @SpringBootApplication
 @ComponentScan({"com.clare"})
+//注意这里的包是tk.mybatis.spring.annotation.MapperScan;
 @MapperScan({"com.clare.mapper"})
 @ServletComponentScan({"com.clare.controller.api"})
 @EnableCaching

@@ -1,6 +1,6 @@
 package com.clare.mapper;
 
-import com.clare.core.mapper.MybatisBaseMapper;
+import com.clare.core.model.MybatisBaseMapper;
 import com.clare.po.User;
 import org.springframework.stereotype.Repository;
 
