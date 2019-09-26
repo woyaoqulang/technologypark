@@ -10,6 +10,11 @@ import java.util.List;
 
 @Service
 @CommonsLog
+/**
+ * 用户信息
+ * @author zhanghao
+ * @date 2019/9/26 18:05
+**/
 public class UserService {
 
     @Autowired

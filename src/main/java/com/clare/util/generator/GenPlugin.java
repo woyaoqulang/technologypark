@@ -1,5 +1,6 @@
 package com.clare.util.generator;
 
+import com.clare.core.constant.SeparatorConstant;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -7,9 +8,7 @@ import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
-import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
-import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.CommentGeneratorConfiguration;
 import org.mybatis.generator.config.Context;
@@ -19,7 +18,6 @@ import java.util.*;
 
 /**
  * 自定义插件
- *
  * @author CZH
  */
 public class GenPlugin extends PluginAdapter {
@@ -50,7 +48,7 @@ public class GenPlugin extends PluginAdapter {
     public void setProperties(Properties properties) {
         super.setProperties(properties);
         String mappers = this.properties.getProperty("mappers");
-        for (String mapper : mappers.split(",")) {
+        for (String mapper : mappers.split(SeparatorConstant.EN_COMMA_CHARACTER)) {
             this.mappers.add(mapper);
         }
     }
@@ -138,7 +136,12 @@ public class GenPlugin extends PluginAdapter {
     }
 
 
-    // 以下设置为false,取消生成默认增删查改xml
+    /**
+     * 以下设置为false,取消生成默认增删查改xml
+     * @author zhanghao
+     * @date 2019/9/26 18:04
+     * @return
+    **/
     @Override
     public boolean clientDeleteByPrimaryKeyMethodGenerated(Method method, Interface interfaze, IntrospectedTable introspectedTable) {
         return false;

@@ -48,7 +48,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/api/**");
     }
 
-
     /**
      * 跨域配置
      * @return
@@ -76,24 +75,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new CorsFilter(source));
         return filterRegistrationBean;
     }
-
-    /**
-     * 自定义字符串转化
-     * @return
-     */
-    @Bean
-    public HttpMessageConverter<String > stringHttpMessageConverter(){
-        StringHttpMessageConverter messageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
-        return messageConverter;
-    }
-
-
-    @Bean
+/*
+    这一块可以利用spring的配置实现
+    @Bean("fastJsonHttpMessageConverter")
     public HttpMessageConverter fastJsonHttpMessageConverters(){
         //1、需要定义一个converter转换信息的对象
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         //2、添加fastjson的配置信息
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        com.alibaba.fastjson.support.config.FastJsonConfig fastJsonConfig = new com.alibaba.fastjson.support.config.FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
         //3、处理中文乱码问题
         List<MediaType> mediaTypes = new ArrayList<>();
@@ -103,6 +92,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         fastConverter.setFastJsonConfig(fastJsonConfig);
         return fastConverter;
     }
+*/
 
 
 

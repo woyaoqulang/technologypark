@@ -1,14 +1,14 @@
 package com.clare.core.common;
 
+import com.clare.core.model.PageInfo;
 import com.clare.core.model.ResultApi;
 import com.clare.core.model.ResultApiBuilder;
 import com.clare.core.util.ServletUtil;
 import com.clare.core.util.StringUtil;
 import com.clare.core.util.TemplatesUtil;
 import com.clare.core.web.RequestContext;
-import lombok.experimental.var;
+
 import lombok.extern.apachecommons.CommonsLog;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.TemplateEngine;
 
-import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
@@ -38,8 +37,17 @@ public class BaseController {
     TemplateEngine templateEngine;
 
     @ModelAttribute
-    protected void setReqAndResp(Model model, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+    protected void setReqAndResp(Model model, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes, PageInfo<?> pageInfo) {
         RequestContext.get().setModel(model);
+        if (pageInfo.getPageNo() < 1) {
+            pageInfo.setPageNo(1);
+        }
+
+        if (pageInfo.getPageSize() > 200) {
+            pageInfo.setPageSize(200);
+        }
+
+        RequestContext.get().setPageInfo(pageInfo);
     }
 
 
@@ -95,7 +103,7 @@ public class BaseController {
         } else {
             model.addAttribute("_error", exception.getMessage());
         }
-        HashMap<String, Object> hashMap = new HashMap<>();
+        HashMap<String, Object> hashMap = new HashMap<>(16);
         hashMap.put("error",exception.getMessage());
         String content = TemplatesUtil.createTemplates(hashMap, "error/500", templateEngine);
         HttpServletResponse response = response();

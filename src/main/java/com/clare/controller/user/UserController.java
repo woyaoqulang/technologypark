@@ -6,6 +6,7 @@ import com.clare.core.config.ConfigProperties;
 import com.clare.core.model.ResultApi;
 import com.clare.po.User;
 import com.clare.service.UserService;
+import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.apachecommons.CommonsLog;
@@ -31,17 +32,10 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @Value("${token_name}")
-    private String type;
-
-    @Autowired
-    private ConfigProperties configProperties;
-
     @ApiOperation("获取用户登陆列表")
     @GetMapping("/getUserInfoList")
     public ResultApi getUserInfoList(){
-        System.out.println("----------："+type);
-        System.out.println("----------："+configProperties.getTokenName());
+        PageHelper.startPage(1,10);
         List<User> result =userService.getUserInfoList();
         ResultApi<List<User>> objectResultApi = new ResultApi<>();
         objectResultApi.setResult(result);

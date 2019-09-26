@@ -2,6 +2,11 @@ package com.clare.core.util;
 
 import java.util.Comparator;
 
+/**
+ *
+ * @author zhanghao
+ * @date 2019/9/26 18:05
+ **/
 public class MapNumberKeyComparator<T> implements Comparator<T> {
 
     protected MapNumberKeyComparator.Order order;

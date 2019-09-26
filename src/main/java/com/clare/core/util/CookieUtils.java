@@ -1,5 +1,7 @@
 package com.clare.core.util;
 
+import com.clare.core.constant.BaseConstant;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -10,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * 
  * Cookie 工具类
- *
- */
+ * @author zhanghao
+ * @date 2019/9/26 18:05
+**/
 public final class CookieUtils {
 
     /**
@@ -149,11 +151,11 @@ public final class CookieUtils {
                 cookie.setMaxAge(cookieMaxage);
             }
 
-
-            if (null != request) {// 设置域名的cookie
+            // 设置域名的cookie
+            if (null != request) {
             	String domainName = getDomainName(request);
             	System.out.println(domainName);
-                if (!"localhost".equals(domainName)) {
+                if (!BaseConstant.LOCALHOST.equals(domainName)) {
                 	cookie.setDomain(domainName);
                 }
             }
@@ -184,7 +186,7 @@ public final class CookieUtils {
             if (null != request) {// 设置域名的cookie
             	String domainName = getDomainName(request);
             	System.out.println(domainName);
-                if (!"localhost".equals(domainName)) {
+                if (!BaseConstant.LOCALHOST.equals(domainName)) {
                 	cookie.setDomain(domainName);
                 }
             }
@@ -222,7 +224,7 @@ public final class CookieUtils {
             }
         }
 
-        if (domainName != null && domainName.indexOf(":") > 0) {
+        if (domainName != null && domainName.indexOf(BaseConstant.EN_COLON_CHARACTER) > 0) {
             String[] ary = domainName.split("\\:");
             domainName = ary[0];
         }
