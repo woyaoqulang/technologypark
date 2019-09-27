@@ -91,5 +91,4 @@ buildNumber.properties
 .settings
 .metadata
 *.iml
-src/test/
 
