@@ -8,6 +8,8 @@ import com.clare.core.util.StringUtil;
 import com.clare.core.util.TemplatesUtil;
 import com.clare.core.web.RequestContext;
 
+import com.clare.core.web.ZhPageHelper;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,14 +44,11 @@ public class BaseController {
         if (pageInfo.getPageNo() < 1) {
             pageInfo.setPageNo(1);
         }
-
         if (pageInfo.getPageSize() > 200) {
             pageInfo.setPageSize(200);
         }
-
         RequestContext.get().setPageInfo(pageInfo);
     }
-
 
     @ExceptionHandler({Exception.class})
     @ResponseBody
@@ -63,7 +62,6 @@ public class BaseController {
         }
 
     }
-
 
     protected <T> ResultApi<T> respond500(Object errorMessage) {
         return ResultApiBuilder.buildResultApi("500", errorMessage);
@@ -121,6 +119,24 @@ public class BaseController {
         return RequestContext.getResponse();
     }
 
+    protected void startPage() {
+        ZhPageHelper.startPage();
+    }
 
+    protected void startPage(Integer pageNo) {
+        ZhPageHelper.startPage(pageNo);
+    }
+
+    protected void startPage(Integer pageNo, Integer pageSize) {
+        ZhPageHelper.startPage(pageNo, pageSize);
+    }
+
+    protected int pageNo() {
+        return this.pageInfo().getPageNo();
+    }
+
+    protected <T> PageInfo<T> pageInfo() {
+        return RequestContext.getPageInfo();
+    }
 
 }

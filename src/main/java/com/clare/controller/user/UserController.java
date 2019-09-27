@@ -3,6 +3,7 @@ package com.clare.controller.user;
 
 import com.clare.core.common.BaseController;
 import com.clare.core.config.ConfigProperties;
+import com.clare.core.model.PageInfo;
 import com.clare.core.model.ResultApi;
 import com.clare.po.User;
 import com.clare.service.UserService;
@@ -34,12 +35,12 @@ public class UserController extends BaseController {
 
     @ApiOperation("获取用户登陆列表")
     @GetMapping("/getUserInfoList")
-    public ResultApi getUserInfoList(){
-        PageHelper.startPage(1,10);
+    public ResultApi<PageInfo<User>> getUserInfoList(){
+        startPage();
         List<User> result =userService.getUserInfoList();
-        ResultApi<List<User>> objectResultApi = new ResultApi<>();
-        objectResultApi.setResult(result);
-        return objectResultApi;
+        PageInfo<User> pageInfo = pageInfo();
+        pageInfo.setResultList(result);
+        return respond500(pageInfo);
     }
 
 

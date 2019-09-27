@@ -26,7 +26,7 @@ public class ZhPageHelper extends PageHelper {
 
     }
 
-    public static void startPage(int pageNo) {
+    public static void startPage(Integer pageNo) {
         PageInfo<?> pageInfo = RequestContext.getPageInfo();
         if (pageInfo.getPageSize() <= 0) {
             startPage(pageNo, 20, true);
