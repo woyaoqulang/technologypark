@@ -3,7 +3,11 @@ package com.clare.core.util;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-
+/**
+ * 
+ * @author zhanghao
+ * @date 2019/9/30 18:11
+**/
 public class UrlEncryptUtil {
     public static String getParameterString(Map<?, ?> paramMap, String... excludedKey) {
         MapNumberKeyComparator<String> bvc = new MapNumberKeyComparator(MapNumberKeyComparator.Order.asc);

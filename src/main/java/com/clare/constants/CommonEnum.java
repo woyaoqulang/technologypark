@@ -12,6 +12,7 @@ public class CommonEnum {
      *登录方式
      */
     public enum LoginWayEnum{
+        //
         Web(1,"PC Web端"),
         WeChat(2,"微信端");
 
@@ -44,6 +45,7 @@ public class CommonEnum {
      * 角色类型
      */
     public enum  RoleType{
+        //
         SuperAdmin(1,"超级管理员"),
         Admin(2,"管理员"),
         SuperVip(3,"超级会员"),

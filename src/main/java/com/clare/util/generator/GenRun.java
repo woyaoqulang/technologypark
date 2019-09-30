@@ -8,7 +8,11 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 自动生成实体类
+ * @author zhanghao
+ * @date 2019/9/30 18:12
+**/
 public class GenRun {
 
     public static void main(String[] args) {

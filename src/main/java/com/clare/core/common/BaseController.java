@@ -1,5 +1,6 @@
 package com.clare.core.common;
 
+import com.clare.core.constant.BaseConstant;
 import com.clare.core.model.PageInfo;
 import com.clare.core.model.ResultApi;
 import com.clare.core.model.ResultApiBuilder;
@@ -35,6 +36,10 @@ import java.util.Map;
 @CommonsLog
 public class BaseController {
 
+    public static final Integer PAGESIZE_DEFAULT= 200;
+
+    public static final String EXCEPTION_MESSAGE= "java.io.IOException: Broken pipe";
+
     @Autowired
     TemplateEngine templateEngine;
 
@@ -44,7 +49,7 @@ public class BaseController {
         if (pageInfo.getPageNo() < 1) {
             pageInfo.setPageNo(1);
         }
-        if (pageInfo.getPageSize() > 200) {
+        if (pageInfo.getPageSize() > PAGESIZE_DEFAULT) {
             pageInfo.setPageSize(200);
         }
         RequestContext.get().setPageInfo(pageInfo);
@@ -73,7 +78,7 @@ public class BaseController {
 
     private boolean sendExceptionInfo(Exception exception) {
         String errorMessage = exception.getMessage();
-        if (StringUtil.isNotEmpty(errorMessage) && errorMessage.contains("java.io.IOException: Broken pipe")) {
+        if (StringUtil.isNotEmpty(errorMessage) && errorMessage.contains(EXCEPTION_MESSAGE)) {
             return true;
         } else {
             Map<String, String>[] requestInfoMap = ServletUtil.getClientInfoStat(this.request());
