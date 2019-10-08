@@ -14,7 +14,6 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "classpath:config.properties",encoding = "UTF-8")
 public class ConfigProperties {
 
-
     @Value("${token_name}")
     @ApiModelProperty(value="登录token-key值")
     private String tokenName;
