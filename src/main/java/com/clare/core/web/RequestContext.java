@@ -20,7 +20,7 @@ import java.util.Map;
  **/
 public class RequestContext {
 
-    private static final ThreadLocal<RequestContext> contextThreadLocal = new ThreadLocal<RequestContext>();
+    private static final ThreadLocal<RequestContext> contextThreadLocal = new ThreadLocal<>();
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -44,7 +44,7 @@ public class RequestContext {
         requestContext.request = request;
         requestContext.response = response;
         requestContext.session = request.getSession();
-        requestContext.cookies = new HashMap<String, Cookie>();
+        requestContext.cookies = new HashMap<>(16);
         Cookie[] cookies = request.getCookies();
         if (cookies != null)
         {
