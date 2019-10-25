@@ -7,6 +7,7 @@ import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
@@ -29,9 +30,14 @@ import java.util.Map;
 @CommonsLog
 public class DynamicDataSourceConfig implements EnvironmentAware {
 
+    //默认数据源
     private static final String DEFAULT_NAME="spring.custom.datasource.default-name";
-
+    //多数据源名称
     private static final String DATA_SOURCE_NAME="spring.custom.datasource.name";
+    //数据源前缀
+    private static final String DATA_SOURCE_PREFIX="spring.custom.datasource";
+    //druid配置前缀
+    private static final String DRUID_PREFIX="spring.datasource.druid";
 
     private Map<String, DruidDataSource> customDataSource;
 
@@ -57,12 +63,23 @@ public class DynamicDataSourceConfig implements EnvironmentAware {
         return druidDataSource;
     }
 
+
     @Bean(name = {"dynamicDataSource"})
     @Primary
-    public String dynamicDataSource(){
+    public DynamicDataSource dynamicDataSource(){
+        Map<Object, Object> targetDataSource = new HashMap<>();
+        initCustomDataSource();
+        targetDataSource.putAll(customDataSource);
+        DynamicDataSource dynamicDataSource = new DynamicDataSource();
+        dynamicDataSource.setTargetDataSources(targetDataSource);
+        dynamicDataSource.setDefaultTargetDataSource(getDefaultDataSource());
+        dynamicDataSource.afterPropertiesSet();
+        return dynamicDataSource;
+    }
 
+    private void initCustomDataSource() {
+        //获取当前绑定
         Binder binder = Binder.get(environment);
-
         //默认数据源
         String defaultName = environment.getProperty(DEFAULT_NAME);
         //所有数据源
@@ -71,28 +88,13 @@ public class DynamicDataSourceConfig implements EnvironmentAware {
             log.error("多个数据源列表为空");
         }else{
             String[] split = dataSourceNames.split(",");
-            //environment.getRequiredProperty()
+            for (String s : split) {
+                String key =DATA_SOURCE_PREFIX+s;
+                DruidDataSource dataSource = binder.bind("key", Bindable.of(DruidDataSource.class)).get();
+                dataSource=binder.bind("DRUID_PREFIX",Bindable.ofInstance(dataSource)).get();
+                customDataSource.put(s,dataSource);
+            }
         }
-
-        return defaultName;
-    }
-
-
-    /*@Bean(name = {"dynamicDataSource"})
-    @Primary
-    public DynamicDataSource dynamicDataSource(){
-        HashMap<Object, Object> targetDataSource = new HashMap<>();
-        initCustomDataSource(targetDataSource);
-        DynamicDataSource dynamicDataSource = new DynamicDataSource();
-        dynamicDataSource.setTargetDataSources(targetDataSource);
-        dynamicDataSource.setDefaultTargetDataSource(getDefaultDataSource());
-        dynamicDataSource.afterPropertiesSet();
-        return dynamicDataSource;
-    }*/
-
-    private void initCustomDataSource(HashMap<Object, Object> targetDataSource) {
-        //String[] activeProfiles = environment.getActiveProfiles();
-        //System.out.println(activeProfiles);
     }
 
     @Override
