@@ -39,7 +39,7 @@ public class DynamicDataSourceConfig implements EnvironmentAware {
     //druid配置前缀
     private static final String DRUID_PREFIX="spring.datasource.druid";
 
-    private Map<String, DruidDataSource> customDataSource;
+    private Map<String, DruidDataSource> customDataSource = new HashMap<>();
 
     private Environment environment;
 
@@ -89,9 +89,9 @@ public class DynamicDataSourceConfig implements EnvironmentAware {
         }else{
             String[] split = dataSourceNames.split(",");
             for (String s : split) {
-                String key =DATA_SOURCE_PREFIX+s;
-                DruidDataSource dataSource = binder.bind("key", Bindable.of(DruidDataSource.class)).get();
-                dataSource=binder.bind("DRUID_PREFIX",Bindable.ofInstance(dataSource)).get();
+                String key =DATA_SOURCE_PREFIX+"."+s;
+                DruidDataSource dataSource = binder.bind(key, Bindable.of(DruidDataSource.class)).get();
+                dataSource=binder.bind(DRUID_PREFIX,Bindable.ofInstance(dataSource)).get();
                 customDataSource.put(s,dataSource);
             }
         }

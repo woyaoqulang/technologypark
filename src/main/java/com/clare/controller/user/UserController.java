@@ -43,5 +43,12 @@ public class UserController extends BaseController {
         return respond500(pageInfo);
     }
 
+    @ApiOperation("获取用户登陆列表")
+    @GetMapping("/saveUserInfo")
+    public ResultApi<String> saveUserInfo(){
+        int i = userService.saveUserInfo();
+        return respond500(i);
+    }
+
 
 }
