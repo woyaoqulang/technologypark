@@ -17,7 +17,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 */
 @SpringBootApplication(exclude = {DruidDataSourceAutoConfigure.class,DataSourceAutoConfiguration.class})
 @ComponentScan({"com.rowan"})
-@MapperScan({"com.clare.mapper"})
+@MapperScan({"com.rowan.mapper"})
 @ServletComponentScan({"com.clare.controller.api"})
 @EnableCaching
 public class Application {
