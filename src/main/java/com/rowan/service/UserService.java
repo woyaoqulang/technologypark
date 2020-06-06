@@ -17,7 +17,7 @@ import java.util.List;
  **/
 @Service
 @CommonsLog
-@DataSource("test")
+@DataSource("technology")
 public class UserService {
 
     @Autowired

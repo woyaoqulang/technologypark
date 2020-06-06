@@ -27,7 +27,7 @@ public class Swagger2Config {
         docket.apiInfo(apiInfo())
                 .groupName("用户信息")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.clare.controller.user"))
+                .apis(RequestHandlerSelectors.basePackage("com.rowan.controller.user"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;
