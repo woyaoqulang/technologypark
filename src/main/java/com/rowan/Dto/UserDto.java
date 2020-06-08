@@ -1,11 +1,9 @@
-package com.rowan.po;
+package com.rowan.Dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.util.Date;
-import javax.persistence.Table;
-
-import lombok.Data;
 
 /**
  * @description: 用户表
@@ -13,9 +11,7 @@ import lombok.Data;
  * @date: 2020/6/8 15:14
  **/
 @Data
-public class User {
-    @ApiModelProperty(value = "主键id")
-    private Integer id;
+public class UserDto {
 
     @ApiModelProperty(value = "用户名")
     private String username;
@@ -31,12 +27,6 @@ public class User {
 
     @ApiModelProperty(value = "邮箱")
     private String email;
-
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
-
-    @ApiModelProperty(value = "修改时间")
-    private Date updateTime;
 
     @ApiModelProperty(value = "注册途径")
     private Integer source;

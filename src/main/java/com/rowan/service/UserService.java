@@ -1,12 +1,15 @@
 package com.rowan.service;
 
+import com.rowan.Dto.UserDto;
 import com.rowan.core.dao.DataSource;
 import com.rowan.mapper.UserMapper;
 import com.rowan.po.User;
 import lombok.extern.apachecommons.CommonsLog;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,9 +38,10 @@ public class UserService {
         return users;
     }
 
-    public int saveUserInfo() {
+    public User saveUserInfo(UserDto userDto) {
         User user = new User();
-        user.setName("zhanghao");
-        return userMapper.insert(user);
+        BeanUtils.copyProperties(userDto, user);
+        user.setCreateTime(new Date());
+        return user;
     }
 }
