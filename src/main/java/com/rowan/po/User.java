@@ -3,6 +3,8 @@ package com.rowan.po;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -15,6 +17,7 @@ import lombok.Data;
 @Data
 public class User {
     @ApiModelProperty(value = "主键id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ApiModelProperty(value = "用户名")

@@ -42,6 +42,7 @@ public class UserService {
         User user = new User();
         BeanUtils.copyProperties(userDto, user);
         user.setCreateTime(new Date());
+        userMapper.insertSelective(user);
         return user;
     }
 }
