@@ -89,9 +89,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         fastJsonConfig.setSerializerFeatures(new SerializerFeature[]{SerializerFeature.PrettyFormat, SerializerFeature.DisableCircularReferenceDetect});
 
         ParserConfig parserConfig = fastJsonConfig.getParserConfig();
-        parserConfig.putDeserializer(Integer.class, new IntegerCodec());
-        parserConfig.putDeserializer(Integer.TYPE, new IntegerCodec());
+        parserConfig.putDeserializer(Long.class, new LongCodec());
+        parserConfig.putDeserializer(Long.TYPE, new LongCodec());
         fastJsonConfig.setParserConfig(parserConfig);
+
         fastConverter.setFastJsonConfig(fastJsonConfig);
 
         List<MediaType> oFastMediaTypeList = new ArrayList();

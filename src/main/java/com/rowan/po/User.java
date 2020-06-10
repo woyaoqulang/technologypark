@@ -1,13 +1,10 @@
 package com.rowan.po;
 
+import com.rowan.core.model.BaseLongEntity;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.util.Date;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
-
-import lombok.Data;
 
 /**
  * @description: 用户表
@@ -15,10 +12,9 @@ import lombok.Data;
  * @date: 2020/6/8 15:14
  **/
 @Data
-public class User {
-    @ApiModelProperty(value = "主键id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class User extends BaseLongEntity {
+
+    private Long id;
 
     @ApiModelProperty(value = "用户名")
     private String username;
