@@ -14,6 +14,7 @@ import java.util.Date;
 @Data
 public class User extends BaseLongEntity {
 
+    @ApiModelProperty("主键id")
     private Long id;
 
     @ApiModelProperty(value = "用户名")

@@ -18,7 +18,6 @@ import java.io.Serializable;
 public abstract class BaseLongEntity implements Serializable {
     private static final long serialVersionUID = 4960281194861384485L;
 
-    @ApiModelProperty("主键id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
