@@ -30,7 +30,7 @@
                         userId="${spring.datasource.username}"
                         password="${spring.datasource.password}"/>
         <!-- 生成实体类配置 -->
-        <javaModelGenerator targetPackage="com.rowan.po" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.rowan.model.po" targetProject="src/main/java"/>
         <!-- 生成映射文件配置 -->
         <sqlMapGenerator targetPackage="com.rowan.mapper" targetProject="src/main/resources"/>
         <!-- 生成映射接口配置 -->

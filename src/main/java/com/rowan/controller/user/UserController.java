@@ -1,11 +1,11 @@
 package com.rowan.controller.user;
 
 
-import com.rowan.Dto.UserDto;
+import com.rowan.model.dto.UserDto;
 import com.rowan.core.common.BaseController;
 import com.rowan.core.model.PageInfo;
 import com.rowan.core.model.ResultApi;
-import com.rowan.po.User;
+import com.rowan.model.po.User;
 import com.rowan.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
