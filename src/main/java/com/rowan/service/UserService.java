@@ -5,6 +5,7 @@ import com.rowan.core.dao.DataSource;
 import com.rowan.mapper.UserMapper;
 import com.rowan.model.po.User;
 import lombok.extern.apachecommons.CommonsLog;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import java.util.List;
  * @date 2019/9/26 18:05
  **/
 @Service
-@CommonsLog
+@Slf4j
 @DataSource("technology")
 public class UserService {
 
