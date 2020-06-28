@@ -90,7 +90,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         ParserConfig parserConfig = fastJsonConfig.getParserConfig();
         parserConfig.putDeserializer(Long.class, new LongCodec());
-        parserConfig.putDeserializer(Long.TYPE, new LongCodec());
         fastJsonConfig.setParserConfig(parserConfig);
 
         fastConverter.setFastJsonConfig(fastJsonConfig);
