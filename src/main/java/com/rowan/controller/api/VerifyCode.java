@@ -161,7 +161,7 @@ public class VerifyCode {
                 String word = "好一路阳光子无开月了的比小山古天中石头井火大西木开人也叶九七六五合文只个鱼羊哈么点四生件格不步布各你田红蓝来很春下画京左百白东关工共足方尺才梦见查着去区曲寻早可上丰爱呵刘";
                 for (int flag = 0; flag < 4; flag++) {
                     Integer number = r.nextInt(85);
-                    code.append(word.substring(number, number + 1));
+                    code.append(word, number, number + 1);
                 }
                 break;
             default:

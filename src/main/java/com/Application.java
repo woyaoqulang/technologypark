@@ -12,10 +12,11 @@ import tk.mybatis.spring.annotation.MapperScan;
 /**
  * 启动类
  * MapperScan-注意这里的包是tk.mybatis.spring.annotation.MapperScan;
+ *
  * @author zhangHao
  * @date 2019/7/15 22:47
-*/
-@SpringBootApplication(exclude = {DruidDataSourceAutoConfigure.class,DataSourceAutoConfiguration.class})
+ */
+@SpringBootApplication(exclude = {DruidDataSourceAutoConfigure.class, DataSourceAutoConfiguration.class})
 @ComponentScan({"com.rowan"})
 @MapperScan({"com.rowan.mapper"})
 @ServletComponentScan({"com.clare.controller.api"})

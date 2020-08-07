@@ -1,7 +1,5 @@
 package com.rowan.core.model;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;

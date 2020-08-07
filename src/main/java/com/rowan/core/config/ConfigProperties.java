@@ -7,19 +7,20 @@ import org.springframework.context.annotation.PropertySource;
 
 /**
  * 读取配置文件
+ *
  * @author zhanghao
  * @date 2019/8/28 14:48
-**/
+ **/
 @Configuration
-@PropertySource(value = "classpath:config.properties",encoding = "UTF-8")
+@PropertySource(value = "classpath:config.properties", encoding = "UTF-8")
 public class ConfigProperties {
 
     @Value("${token_name}")
-    @ApiModelProperty(value="登录token-key值")
+    @ApiModelProperty(value = "登录token-key值")
     private String tokenName;
 
     @Value("${token_expire}")
-    @ApiModelProperty(value="登录token失效时间")
+    @ApiModelProperty(value = "登录token失效时间")
     private Integer tokenExpire;
 
     public String getTokenName() {

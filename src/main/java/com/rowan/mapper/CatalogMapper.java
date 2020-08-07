@@ -1,7 +1,7 @@
 package com.rowan.mapper;
 
-import com.rowan.model.po.Catalog;
 import com.rowan.core.model.MybatisBaseMapper;
+import com.rowan.model.po.Catalog;
 
 /**
  * @description: 目录表(Catalog)数据库访问层

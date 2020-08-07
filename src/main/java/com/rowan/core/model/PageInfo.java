@@ -1,8 +1,8 @@
 package com.rowan.core.model;
 
 
-import com.rowan.core.exception.BusinessException;
 import com.github.pagehelper.Page;
+import com.rowan.core.exception.BusinessException;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.extern.apachecommons.CommonsLog;
@@ -55,6 +55,29 @@ public class PageInfo<T> {
     private int navigatePages;
     @ApiModelProperty("所有导航页号")
     private int[] navigatepageNums;
+
+    public PageInfo() {
+        this.pageNo = 1;
+        this.pageSize = 20;
+        this.isFirstPage = false;
+        this.isLastPage = false;
+        this.hasPreviousPage = false;
+        this.hasNextPage = false;
+    }
+
+    public PageInfo(List<T> resultList) {
+        this(resultList, 8);
+    }
+
+    public PageInfo(List<T> resultList, int navigatePages) {
+        this.pageNo = 1;
+        this.pageSize = 20;
+        this.isFirstPage = false;
+        this.isLastPage = false;
+        this.hasPreviousPage = false;
+        this.hasNextPage = false;
+        this.calPageInfo(resultList, navigatePages);
+    }
 
     private void calPageInfo(List<T> resultList, int navigatePages) {
         Page page = null;
@@ -151,35 +174,20 @@ public class PageInfo<T> {
         this.calPageInfo(resultList, navigatePages);
     }
 
-    public PageInfo() {
-        this.pageNo = 1;
-        this.pageSize = 20;
-        this.isFirstPage = false;
-        this.isLastPage = false;
-        this.hasPreviousPage = false;
-        this.hasNextPage = false;
-    }
-
-    public PageInfo(List<T> resultList) {
-        this(resultList, 8);
-    }
-
-    public PageInfo(List<T> resultList, int navigatePages) {
-        this.pageNo = 1;
-        this.pageSize = 20;
-        this.isFirstPage = false;
-        this.isLastPage = false;
-        this.hasPreviousPage = false;
-        this.hasNextPage = false;
-        this.calPageInfo(resultList, navigatePages);
-    }
-
     public int getPageNo() {
         return pageNo;
     }
 
+    public void setPageNo(int pageNo) {
+        this.pageNo = pageNo;
+    }
+
     public int getPageSize() {
         return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     public int getCurrentPageSize() {
@@ -244,13 +252,5 @@ public class PageInfo<T> {
 
     public int[] getNavigatepageNums() {
         return navigatepageNums;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public void setPageNo(int pageNo) {
-        this.pageNo = pageNo;
     }
 }

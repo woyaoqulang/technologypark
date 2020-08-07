@@ -5,9 +5,10 @@ import java.util.Map;
 
 /**
  * 错误码
+ *
  * @author zhangHao
  * @date 2019/7/16 22:58
-*/
+ */
 public class ErrorCode {
     public static final Map<String, String> errorMap = new HashMap();
     public static final String errorCodeKey = "errorCode";
@@ -22,9 +23,6 @@ public class ErrorCode {
     public static final String code_500 = "500";
     public static final String code_600 = "600";
 
-    public ErrorCode() {
-    }
-
     static {
         errorMap.put("0", "成功");
         errorMap.put("1", "登录成功，但是未绑定");
@@ -35,5 +33,8 @@ public class ErrorCode {
         errorMap.put("404", "找不到资源");
         errorMap.put("500", "服务端错误");
         errorMap.put("600", "接口请求正常，但是有来自接口的业务提示");
+    }
+
+    public ErrorCode() {
     }
 }

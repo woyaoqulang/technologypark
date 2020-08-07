@@ -15,6 +15,7 @@ import java.util.Map;
 
 /**
  * Spring请求上下文
+ *
  * @author zhanghao
  * @date 2019/9/26 18:05
  **/
@@ -33,12 +34,12 @@ public class RequestContext {
 
     /**
      * 初始化上下文
+     *
+     * @return
      * @author zhanghao
      * @date 2019/8/30 14:23
-     * @return
-    **/
-    public static RequestContext start(HttpServletRequest request, HttpServletResponse response)
-    {
+     **/
+    public static RequestContext start(HttpServletRequest request, HttpServletResponse response) {
 
         RequestContext requestContext = new RequestContext();
         requestContext.request = request;
@@ -46,10 +47,8 @@ public class RequestContext {
         requestContext.session = request.getSession();
         requestContext.cookies = new HashMap<>(16);
         Cookie[] cookies = request.getCookies();
-        if (cookies != null)
-        {
-            for (Cookie ck : cookies)
-            {
+        if (cookies != null) {
+            for (Cookie ck : cookies) {
                 requestContext.cookies.put(ck.getName(), ck);
             }
         }
@@ -64,10 +63,43 @@ public class RequestContext {
 
     /**
      * 获取当前请求的上下文
+     *
      * @return
      */
     public static RequestContext get() {
         return contextThreadLocal.get();
+    }
+
+    public static Model getModel() {
+        RequestContext requestContext = get();
+        return requestContext == null ? null : requestContext._getModel();
+    }
+
+    public void setModel(Model model) {
+        RequestContext requestContext = contextThreadLocal.get();
+        if (requestContext != null) {
+            requestContext._setModel(model);
+            contextThreadLocal.set(requestContext);
+        }
+    }
+
+    public static HttpServletResponse getResponse() {
+        RequestContext requestContext = get();
+        return requestContext == null ? null : requestContext._getResponse();
+    }
+
+    public static <T> PageInfo<T> getPageInfo() {
+        RequestContext requestContext = contextThreadLocal.get();
+        return requestContext == null ? null : requestContext._getPageInfo();
+    }
+
+    public void setPageInfo(PageInfo<?> pageInfo) {
+        RequestContext requestContext = contextThreadLocal.get();
+        if (requestContext != null) {
+            requestContext._setPageInfo(pageInfo);
+            requestContext._setPageable(PageRequest.of(pageInfo.getPageNo(), pageInfo.getPageSize()));
+            contextThreadLocal.set(requestContext);
+        }
     }
 
     private HttpServletRequest _getRequest() {
@@ -86,48 +118,16 @@ public class RequestContext {
         contextThreadLocal.remove();
     }
 
-    public static Model getModel() {
-        RequestContext requestContext = get();
-        return requestContext == null ? null : requestContext._getModel();
-    }
-
     private Model _getModel() {
         return this.model;
-    }
-
-    public static HttpServletResponse getResponse() {
-        RequestContext requestContext = get();
-        return requestContext == null ? null : requestContext._getResponse();
     }
 
     private HttpServletResponse _getResponse() {
         return this.response;
     }
 
-    public void setModel(Model model) {
-        RequestContext requestContext = (RequestContext)contextThreadLocal.get();
-        if (requestContext != null) {
-            requestContext._setModel(model);
-            contextThreadLocal.set(requestContext);
-        }
-    }
-
     private void _setModel(Model model) {
         this.model = model;
-    }
-
-    public static <T> PageInfo<T> getPageInfo() {
-        RequestContext requestContext = (RequestContext)contextThreadLocal.get();
-        return requestContext == null ? null : requestContext._getPageInfo();
-    }
-
-    public void setPageInfo(PageInfo<?> pageInfo) {
-        RequestContext requestContext = (RequestContext)contextThreadLocal.get();
-        if (requestContext != null) {
-            requestContext._setPageInfo(pageInfo);
-            requestContext._setPageable(PageRequest.of(pageInfo.getPageNo(), pageInfo.getPageSize()));
-            contextThreadLocal.set(requestContext);
-        }
     }
 
     private <T> PageInfo<T> _getPageInfo() {

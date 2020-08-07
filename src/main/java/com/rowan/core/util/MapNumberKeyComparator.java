@@ -3,7 +3,6 @@ package com.rowan.core.util;
 import java.util.Comparator;
 
 /**
- *
  * @author zhanghao
  * @date 2019/9/26 18:05
  **/
@@ -37,14 +36,14 @@ public class MapNumberKeyComparator<T> implements Comparator<T> {
         }
     }
 
-    public static enum Order {
+    public enum Order {
         desc("倒序", -1),
         asc("正序", 1);
 
         protected String name;
         protected int sign;
 
-        private Order(String name, int sign) {
+        Order(String name, int sign) {
             this.name = name;
             this.sign = sign;
         }

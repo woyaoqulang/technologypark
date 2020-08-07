@@ -1,5 +1,9 @@
-
 package com.rowan.core.util;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -7,26 +11,17 @@ import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.StringTokenizer;
-import java.util.UUID;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public final class StringUtil extends StringUtils {
+    public static final int toLowerCase = 1;
+    public static final int toUpperCase = 2;
     static final Pattern mobilePattern = Pattern.compile("^1\\d{10}$");
     static final Pattern userNamePt = Pattern.compile("^lv[0-9]{11}$");
     static final Pattern pinyinPattern = Pattern.compile("([a-z|A-Z]*)");
@@ -34,8 +29,6 @@ public final class StringUtil extends StringUtils {
     static final Pattern emailPattern = Pattern.compile("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
     static final Pattern phonePattern = Pattern.compile("^(13[0-9]|14[0-9]|15[0-9]|18[0-9]|17[0-9])\\d{8}$");
     private static final Log log = LogFactory.getLog(StringUtil.class);
-    public static final int toLowerCase = 1;
-    public static final int toUpperCase = 2;
     private static final String RANDOM_STRING_POOL = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
     private static final Random RANDOM = new Random();
 
@@ -182,7 +175,7 @@ public final class StringUtil extends StringUtils {
                 buf.append("0");
             }
 
-            buf.append(Long.toString((long) (encodedPassword[i] & 255), 16));
+            buf.append(Long.toString(encodedPassword[i] & 255, 16));
         }
 
         return buf.toString();
@@ -223,7 +216,7 @@ public final class StringUtil extends StringUtils {
     }
 
     public static String leftPadAndSubString(String str, int size, String padStr) {
-        String str2 = leftPad((String) str, size, padStr);
+        String str2 = leftPad(str, size, padStr);
         str2 = substring(str2, 0, size);
         return str2;
     }
@@ -240,7 +233,7 @@ public final class StringUtil extends StringUtils {
     }
 
     public static boolean isEmptyString(String str) {
-        return str == null ? true : str.trim().equals("");
+        return str == null || str.trim().equals("");
     }
 
     public static boolean isNotEmptyString(String str) {
@@ -361,7 +354,7 @@ public final class StringUtil extends StringUtils {
     public static String toUTF8(String str) {
         if (isNotEmpty(str)) {
             try {
-                return new String(str.getBytes("iso8859-1"), "UTF-8");
+                return new String(str.getBytes("iso8859-1"), StandardCharsets.UTF_8);
             } catch (Exception var2) {
                 return "";
             }
@@ -442,7 +435,6 @@ public final class StringUtil extends StringUtils {
 
                 out.append("]");
             } catch (Exception var11) {
-                ;
             }
 
             return out.toString();
@@ -453,7 +445,7 @@ public final class StringUtil extends StringUtils {
         String s = template;
 
         String key;
-        for (Iterator var5 = values.keySet().iterator(); var5.hasNext(); s = s.replace(varStart + key + varEnd, (CharSequence) (values.get(key) == null ? "" : (CharSequence) values.get(key)))) {
+        for (Iterator var5 = values.keySet().iterator(); var5.hasNext(); s = s.replace(varStart + key + varEnd, values.get(key) == null ? "" : values.get(key))) {
             key = (String) var5.next();
         }
 
@@ -484,7 +476,7 @@ public final class StringUtil extends StringUtils {
         String str = realplayMobleAndEmail(userName);
         if (!str.equals(userName)) {
             return str;
-        } else if (userNamePt.matcher(userName).find() && validMobileNumber(userName.substring(2, userName.length()))) {
+        } else if (userNamePt.matcher(userName).find() && validMobileNumber(userName.substring(2))) {
             return userName.substring(0, userName.length() - 4) + "****";
         } else {
             return len == -1 ? str : cutString2(len, str);
@@ -588,7 +580,7 @@ public final class StringUtil extends StringUtils {
     }
 
     public static boolean isNumber(String str) {
-        return isBlank(str) ? false : str.matches("^\\d+");
+        return !isBlank(str) && str.matches("^\\d+");
     }
 
     public static String outputJSContent(String str) {
@@ -609,7 +601,7 @@ public final class StringUtil extends StringUtils {
         if (s1 != null) {
             return s1.equals(s2);
         } else {
-            return s2 != null ? s2.equals(s1) : true;
+            return s2 == null || s2.equals(s1);
         }
     }
 
@@ -638,8 +630,8 @@ public final class StringUtil extends StringUtils {
         boolean first = true;
 
         for (int i = 0; i < keys.size(); ++i) {
-            String key = (String) keys.get(i);
-            String value = (String) params.get(key);
+            String key = keys.get(i);
+            String value = params.get(key);
             if (value != null && value.trim().length() != 0) {
                 if (first) {
                     prestr = prestr + key + "=" + value;
@@ -659,7 +651,7 @@ public final class StringUtil extends StringUtils {
 
         while (var2.hasNext()) {
             Entry<String, String> entry = (Entry) var2.next();
-            prestr.append("&" + (String) entry.getKey() + "=" + (entry.getValue() == null ? "" : (String) entry.getValue()));
+            prestr.append("&" + entry.getKey() + "=" + (entry.getValue() == null ? "" : entry.getValue()));
         }
 
         if (prestr.length() > 0) {
@@ -887,7 +879,7 @@ public final class StringUtil extends StringUtils {
             int index = inString.indexOf(oldPattern);
 
             for (int patLen = oldPattern.length(); index >= 0; index = inString.indexOf(oldPattern, pos)) {
-                sbuf.append(inString.substring(pos, index));
+                sbuf.append(inString, pos, index);
                 sbuf.append(newPattern);
                 pos = index + patLen;
             }
@@ -932,7 +924,7 @@ public final class StringUtil extends StringUtils {
     }
 
     public static String random(int count, int start, int end, boolean letters, boolean numbers) {
-        return random(count, start, end, letters, numbers, (char[]) null, RANDOM);
+        return random(count, start, end, letters, numbers, null, RANDOM);
     }
 
     public static String random(int count, int start, int end, boolean letters, boolean numbers, char[] chars, Random random) {
@@ -1036,7 +1028,7 @@ public final class StringUtil extends StringUtils {
     }
 
     public static String getLastSection(String str, String split) {
-        String str2 = str.substring(str.lastIndexOf(split) + 1, str.length());
+        String str2 = str.substring(str.lastIndexOf(split) + 1);
         return str2;
     }
 
@@ -1062,26 +1054,26 @@ public final class StringUtil extends StringUtils {
     }
 
     public static String leftPad(Integer value, int size, String padStr) {
-        return leftPad((String) String.valueOf(value), size, padStr);
+        return leftPad(String.valueOf(value), size, padStr);
     }
 
     public static String leftPad(Long value, int size, String padStr) {
-        return leftPad((String) String.valueOf(value), size, padStr);
+        return leftPad(String.valueOf(value), size, padStr);
     }
 
     public static String leftPad(Byte value, int size, String padStr) {
-        return leftPad((String) String.valueOf(value), size, padStr);
+        return leftPad(String.valueOf(value), size, padStr);
     }
 
     public static String leftPad0(Integer value, int size) {
-        return leftPad((String) String.valueOf(value), size, "0");
+        return leftPad(String.valueOf(value), size, "0");
     }
 
     public static String leftPad0(Long value, int size) {
-        return leftPad((String) String.valueOf(value), size, "0");
+        return leftPad(String.valueOf(value), size, "0");
     }
 
     public static String leftPad0(Byte value, int size) {
-        return leftPad((String) String.valueOf(value), size, "0");
+        return leftPad(String.valueOf(value), size, "0");
     }
 }

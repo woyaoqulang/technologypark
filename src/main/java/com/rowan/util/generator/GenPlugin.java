@@ -18,6 +18,7 @@ import java.util.*;
 
 /**
  * 自定义插件
+ *
  * @author CZH
  */
 public class GenPlugin extends PluginAdapter {
@@ -138,10 +139,11 @@ public class GenPlugin extends PluginAdapter {
 
     /**
      * 以下设置为false,取消生成默认增删查改xml
+     *
+     * @return
      * @author zhanghao
      * @date 2019/9/26 18:04
-     * @return
-    **/
+     **/
     @Override
     public boolean clientDeleteByPrimaryKeyMethodGenerated(Method method, Interface interfaze, IntrospectedTable introspectedTable) {
         return false;

@@ -16,6 +16,7 @@ import java.io.IOException;
 
 /**
  * 向浏览器输出验证码
+ *
  * @author org.javachina
  */
 @WebServlet("/japi/verify_code")

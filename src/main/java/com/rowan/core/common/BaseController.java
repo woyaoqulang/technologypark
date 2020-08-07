@@ -7,7 +7,6 @@ import com.rowan.core.util.ServletUtil;
 import com.rowan.core.util.StringUtil;
 import com.rowan.core.util.TemplatesUtil;
 import com.rowan.core.web.RequestContext;
-
 import com.rowan.core.web.ZhPageHelper;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +27,16 @@ import java.util.Map;
 
 /**
  * 公共controller
+ *
  * @author zhanghao
  * @date 2019/8/28 14:47
-**/
+ **/
 @CommonsLog
 public class BaseController {
 
-    public static final Integer PAGESIZE_DEFAULT= 200;
+    public static final Integer PAGESIZE_DEFAULT = 200;
 
-    public static final String EXCEPTION_MESSAGE= "java.io.IOException: Broken pipe";
+    public static final String EXCEPTION_MESSAGE = "java.io.IOException: Broken pipe";
 
     @Autowired
     TemplateEngine templateEngine;
@@ -55,12 +55,12 @@ public class BaseController {
 
     @ExceptionHandler({Exception.class})
     @ResponseBody
-    public ResultApi<String> exception(Exception exception) throws Exception{
+    public ResultApi<String> exception(Exception exception) throws Exception {
         sendExceptionInfo(exception);
-        if(ServletUtil.isAjaxRequest()){
+        if (ServletUtil.isAjaxRequest()) {
             return respond500("Server Error");
-        }else{
-            this.handException(exception,false);
+        } else {
+            this.handException(exception, false);
             return null;
         }
 
@@ -105,7 +105,7 @@ public class BaseController {
             model.addAttribute("_error", exception.getMessage());
         }
         HashMap<String, Object> hashMap = new HashMap<>(16);
-        hashMap.put("error",exception.getMessage());
+        hashMap.put("error", exception.getMessage());
         String content = TemplatesUtil.createTemplates(hashMap, "error/500", templateEngine);
         HttpServletResponse response = response();
         response.setContentType("text/html;charset=utf-8");
@@ -118,6 +118,7 @@ public class BaseController {
     protected Model model() {
         return RequestContext.getModel();
     }
+
     protected HttpServletResponse response() {
         return RequestContext.getResponse();
     }

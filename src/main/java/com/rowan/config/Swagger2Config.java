@@ -14,15 +14,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * swagger配置
+ *
  * @author zhangHao
  * @date 2019/7/15 22:46
-*/
+ */
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
 
     @Bean
-    public Docket userApi(){
+    public Docket userApi() {
         Docket docket = new Docket(DocumentationType.SWAGGER_2);
         docket.apiInfo(apiInfo())
                 .groupName("用户信息")
@@ -38,7 +39,7 @@ public class Swagger2Config {
                 .title("Technology")
                 .description("技术讨论社区")
                 .termsOfServiceUrl("http://technologypark.com/technology/loginPage")
-                .contact(new Contact("张浩","+86 17821832110","z1679619459@163.com"))
+                .contact(new Contact("张浩", "+86 17821832110", "z1679619459@163.com"))
                 .version("1.0")
                 .build();
     }

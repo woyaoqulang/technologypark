@@ -1,10 +1,10 @@
 package com.rowan.model.po;
 
-import java.util.Date;
-
 import com.rowan.core.model.BaseLongEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @description: 目录表(Catalog)表服务接口

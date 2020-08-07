@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 
 /**
  * redis连接
+ *
  * @author zhangHao
  * @date 2019-07-31 14:55
  */
@@ -46,6 +47,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * 自定义生成key的规则
+     *
      * @return
      */
     @Bean
@@ -60,7 +62,7 @@ public class RedisConfig extends CachingConfigurerSupport {
                 for (Object obj : objects) {
                     sb.append(obj.toString());
                 }
-                System.out.println("调用Reids缓存key："+sb.toString());
+                System.out.println("调用Reids缓存key：" + sb.toString());
                 return sb.toString();
             }
         };
@@ -68,6 +70,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * 采用RedisCacheManager作为缓存管理器
+     *
      * @param factory
      * @return
      */

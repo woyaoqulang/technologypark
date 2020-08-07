@@ -1,12 +1,14 @@
 package com.rowan.core.web;
 
-import com.rowan.core.model.PageInfo;
 import com.github.pagehelper.PageHelper;
+import com.rowan.core.model.PageInfo;
+
 /**
  * 分页处理
+ *
  * @author zhanghao
  * @date 2019/9/26 20:05
-**/
+ **/
 public class ZhPageHelper extends PageHelper {
 
     public static final int defaultPageSize = 20;

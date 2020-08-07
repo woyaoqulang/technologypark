@@ -43,8 +43,8 @@ public class ServletUtil {
         Map<String, String> headInfoMap = new TreeMap();
         Enumeration names = request.getHeaderNames();
 
-        while(names != null & names.hasMoreElements()) {
-            String name = (String)names.nextElement();
+        while (names != null & names.hasMoreElements()) {
+            String name = (String) names.nextElement();
             headInfoMap.put("head:[" + name + "]", request.getHeader(name));
         }
 
@@ -62,7 +62,7 @@ public class ServletUtil {
             Cookie[] var3 = cookies;
             int var4 = cookies.length;
 
-            for(int var5 = 0; var5 < var4; ++var5) {
+            for (int var5 = 0; var5 < var4; ++var5) {
                 Cookie cookie = var3[var5];
                 cookieInfoMap.put("cookie:[" + cookie.getName() + "]", cookie.getValue());
             }

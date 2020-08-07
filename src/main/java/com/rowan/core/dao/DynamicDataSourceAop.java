@@ -61,7 +61,8 @@ public class DynamicDataSourceAop implements Ordered {
 
 
     @AfterReturning("checkParam()")
-    public void doAfterReturning(JoinPoint joinPoint) {}
+    public void doAfterReturning(JoinPoint joinPoint) {
+    }
 
     @Override
     public int getOrder() {
