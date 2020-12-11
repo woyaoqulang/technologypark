@@ -39,7 +39,7 @@ public class UrlEncryptUtil {
                 }
             } while (isIgnore);
 
-            String[] values = paramMap.get(key);
+            String[] values = ( String[])paramMap.get(key);
             String[] as = values;
             int j = values.length;
 
