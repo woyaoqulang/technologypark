@@ -23,7 +23,7 @@ public class IndexAction {
      **/
     @RequestMapping({"/", "/technology/index"})
     public String lteLogin() {
-        return "/index/adminIndex";
+        return "index/adminIndex";
     }
 
     /**
