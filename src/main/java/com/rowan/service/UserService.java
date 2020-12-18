@@ -1,6 +1,7 @@
 package com.rowan.service;
 
 import com.rowan.core.dao.DataSource;
+import com.rowan.core.util.MD5;
 import com.rowan.mapper.UserMapper;
 import com.rowan.model.dto.UserDto;
 import com.rowan.model.po.User;
@@ -41,8 +42,10 @@ public class UserService {
     public User saveUserInfo(UserDto userDto) {
         User user = new User();
         BeanUtils.copyProperties(userDto, user);
+        user.setPassword(MD5.encode(user.getPassword()));
         user.setCreateTime(new Date());
         userMapper.insertSelective(user);
         return user;
     }
+
 }

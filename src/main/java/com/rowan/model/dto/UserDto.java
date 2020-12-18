@@ -3,6 +3,8 @@ package com.rowan.model.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @description: 用户表
  * @author: rowan
@@ -15,6 +17,7 @@ public class UserDto {
     private String username;
 
     @ApiModelProperty(value = "密码")
+    @NotBlank(message = "fff")
     private String password;
 
     @ApiModelProperty(value = "姓名")

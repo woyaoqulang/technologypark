@@ -11,10 +11,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -44,7 +46,7 @@ public class UserController extends BaseController {
 
     @ApiOperation("新增用户")
     @GetMapping("/saveUserInfo")
-    public ResultApi<User> saveUserInfo(UserDto userDto) {
+    public ResultApi<User> saveUserInfo(@Valid UserDto userDto, BindingResult bindingResult) {
         return respondSuccess(userService.saveUserInfo(userDto));
     }
 
