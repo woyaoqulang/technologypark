@@ -63,7 +63,10 @@ public class BaseController {
             this.handException(exception, false);
             return null;
         }
+    }
 
+    protected <T> ResultApi<T> respondSuccess(T result) {
+        return ResultApiBuilder.buildResultApi(result);
     }
 
     protected <T> ResultApi<T> respond500(Object errorMessage) {

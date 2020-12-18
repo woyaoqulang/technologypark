@@ -8,6 +8,13 @@ package com.rowan.core.model;
  **/
 public class ResultApiBuilder {
 
+    public static <T> ResultApi<T> buildResultApi(T result) {
+        ResultApi<T> resultApi = new ResultApi();
+        resultApi.setErrorCode("404");
+        resultApi.setResult(result);
+        return resultApi;
+    }
+
     public static <T> ResultApi<T> buildResultApi(String errorCode) {
         ResultApi<T> resultApi = new ResultApi();
         resultApi.setErrorCode(errorCode);
