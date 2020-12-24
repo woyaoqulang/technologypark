@@ -1,6 +1,6 @@
 package com.rowan.model.po;
 
-import com.rowan.core.model.BaseLongEntity;
+import com.rowan.core.common.BaseLongEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

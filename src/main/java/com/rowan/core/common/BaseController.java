@@ -1,8 +1,5 @@
 package com.rowan.core.common;
 
-import com.rowan.core.model.PageInfo;
-import com.rowan.core.model.ResultApi;
-import com.rowan.core.model.ResultApiBuilder;
 import com.rowan.core.util.ServletUtil;
 import com.rowan.core.util.StringUtil;
 import com.rowan.core.util.TemplatesUtil;

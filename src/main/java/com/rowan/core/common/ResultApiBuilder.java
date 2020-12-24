@@ -1,4 +1,4 @@
-package com.rowan.core.model;
+package com.rowan.core.common;
 
 /**
  * 返回数据对象工厂

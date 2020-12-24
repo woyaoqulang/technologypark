@@ -1,7 +1,7 @@
 package com.rowan.core.web;
 
 import com.github.pagehelper.PageHelper;
-import com.rowan.core.model.PageInfo;
+import com.rowan.core.common.PageInfo;
 
 /**
  * 分页处理

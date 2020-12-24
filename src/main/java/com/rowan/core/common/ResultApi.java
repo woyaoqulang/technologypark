@@ -1,6 +1,5 @@
-package com.rowan.core.model;
+package com.rowan.core.common;
 
-import com.rowan.core.common.ErrorCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,7 +13,7 @@ import java.util.List;
  * @date 2019/8/28 17:05
  **/
 @ApiModel("返回的统一结果")
-public class ResultApi<T> extends Object implements Serializable {
+public class ResultApi<T> implements Serializable {
 
     private static final long serialVersionUID = 830054763344341448L;
 
@@ -27,46 +26,14 @@ public class ResultApi<T> extends Object implements Serializable {
     @ApiModelProperty("返回的结果集")
     private T result;
 
-    public ResultApi() {
+
+    public static <T> ResultApi<T> ok() {
+        return null;
     }
 
-    public ResultApi(String errorCode) {
-        this.errorCode = errorCode;
-        this.errorMessage = ErrorCode.errorMap.get(errorCode);
-    }
-
-    public ResultApi(String errorCode, String errorMessage) {
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
-    }
-
-    public ResultApi(String errorCode, List<Object> errorMessageList) {
-        this.errorCode = errorCode;
-        this.errorMessageList = errorMessageList;
-    }
-
-
-    public ResultApi(String errorCode, String errorMessage, T result) {
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
-        this.result = result;
-    }
-
-
-    public ResultApi(String errorCode, List<Object> errorMessageList, T result) {
-        this.errorCode = errorCode;
-        this.errorMessageList = errorMessageList;
-        this.result = result;
-    }
-
-
-    public ResultApi(String errorCode, T result) {
-        this.errorCode = errorCode;
-        this.result = result;
-    }
 
     public String getErrorCode() {
-        return this.errorCode;
+        return errorCode;
     }
 
     public void setErrorCode(String errorCode) {
@@ -74,7 +41,7 @@ public class ResultApi<T> extends Object implements Serializable {
     }
 
     public Object getErrorMessage() {
-        return this.errorMessage;
+        return errorMessage;
     }
 
     public void setErrorMessage(Object errorMessage) {
@@ -82,7 +49,7 @@ public class ResultApi<T> extends Object implements Serializable {
     }
 
     public List<Object> getErrorMessageList() {
-        return this.errorMessageList;
+        return errorMessageList;
     }
 
     public void setErrorMessageList(List<Object> errorMessageList) {
@@ -90,12 +57,10 @@ public class ResultApi<T> extends Object implements Serializable {
     }
 
     public T getResult() {
-        return this.result;
+        return result;
     }
 
     public void setResult(T result) {
         this.result = result;
     }
-
-
 }

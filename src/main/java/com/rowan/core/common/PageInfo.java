@@ -1,4 +1,4 @@
-package com.rowan.core.model;
+package com.rowan.core.common;
 
 
 import com.github.pagehelper.Page;

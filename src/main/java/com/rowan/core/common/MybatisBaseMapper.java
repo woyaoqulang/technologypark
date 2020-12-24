@@ -1,4 +1,4 @@
-package com.rowan.core.model;
+package com.rowan.core.common;
 
 import tk.mybatis.mapper.common.BaseMapper;
 

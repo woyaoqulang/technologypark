@@ -16,7 +16,7 @@
 
         <!-- 通过自定义插件类生成自定义注解和接口 -->
         <plugin type="com.rowan.util.generator.GenPlugin">
-            <property name="mappers" value="com.rowan.core.model.MybatisBaseMapper" />
+            <property name="mappers" value="com.rowan.core.common.MybatisBaseMapper" />
         </plugin>
 
         <commentGenerator>

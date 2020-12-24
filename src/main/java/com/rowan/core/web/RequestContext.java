@@ -1,6 +1,6 @@
 package com.rowan.core.web;
 
-import com.rowan.core.model.PageInfo;
+import com.rowan.core.common.PageInfo;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;

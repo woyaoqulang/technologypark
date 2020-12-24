@@ -2,8 +2,8 @@ package com.rowan.controller.user;
 
 
 import com.rowan.core.common.BaseController;
-import com.rowan.core.model.PageInfo;
-import com.rowan.core.model.ResultApi;
+import com.rowan.core.common.PageInfo;
+import com.rowan.core.common.ResultApi;
 import com.rowan.model.dto.UserDto;
 import com.rowan.model.po.User;
 import com.rowan.service.UserService;

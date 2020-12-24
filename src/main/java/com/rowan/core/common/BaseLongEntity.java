@@ -1,4 +1,4 @@
-package com.rowan.core.model;
+package com.rowan.core.common;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

@@ -1,6 +1,6 @@
 package com.rowan.mapper;
 
-import com.rowan.core.model.MybatisBaseMapper;
+import com.rowan.core.common.MybatisBaseMapper;
 import com.rowan.model.po.Catalog;
 
 /**
