@@ -1,6 +1,6 @@
 package com.rowan.controller.api;
 
-import com.rowan.core.util.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,14 @@ import java.io.IOException;
  */
 @WebServlet("/japi/verify_code")
 public class VerifyCodeServlet extends HttpServlet {
-    private final static Logger log = LoggerFactory.getLogger(VerifyCodeServlet.class);
+
+    private static final Logger log = LoggerFactory.getLogger(VerifyCodeServlet.class);
+
+    private static final String TYPE = "type";
+
+    private static final String WIDTH = "width";
+    
+    private static final String HEIGHT = "height";
 
     /**
      *
@@ -49,7 +56,7 @@ public class VerifyCodeServlet extends HttpServlet {
 
         // 生成验证码，写入用户session
         String verifyCode = VerifyCode.generateTextCode(VerifyCode.TYPE_HANZI_ONLY, 4, "0oOilJI1");
-        if (StringUtil.isNotEmpty(request.getParameter("type"))) {
+        if (StringUtils.isNotEmpty(request.getParameter(TYPE))) {
             try {
                 verifyCode = VerifyCode.generateTextCode(Integer.valueOf(request.getParameter("type")), 4, "0oOilJI1");
             } catch (Exception e) {
@@ -60,11 +67,11 @@ public class VerifyCodeServlet extends HttpServlet {
         Integer width = 80;
         Integer height = 22;
         try {
-            if (StringUtil.isNotEmpty(request.getParameter("width"))) {
-                width = Integer.valueOf(request.getParameter("width"));
+            if (StringUtils.isNotEmpty(request.getParameter(WIDTH))) {
+                width = Integer.valueOf(request.getParameter(WIDTH));
             }
-            if (StringUtil.isNotEmpty(request.getParameter("height"))) {
-                height = Integer.valueOf(request.getParameter("height"));
+            if (StringUtils.isNotEmpty(request.getParameter(HEIGHT))) {
+                height = Integer.valueOf(request.getParameter(HEIGHT));
             }
             /**
              * 渗透性测试，参数传负数时，页面会显示500

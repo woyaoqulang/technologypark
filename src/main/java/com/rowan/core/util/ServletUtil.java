@@ -1,6 +1,7 @@
 package com.rowan.core.util;
 
 import com.rowan.core.web.RequestContext;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
@@ -155,12 +156,11 @@ public class ServletUtil {
     public static String getFullUrl(HttpServletRequest request) {
         String uri = request.getRequestURL().toString();
         String url = request.getHeader("fullurl");
-        if (StringUtil.isEmpty(url)) {
+        if (StringUtils.isEmpty(url)) {
             String actualFullUrl = getFullUrl(request, false);
             return actualFullUrl;
         } else {
             url = url.replace("amp;", "");
-            //log.debug("get fullurl: " + url);
             return url;
         }
     }
@@ -168,15 +168,15 @@ public class ServletUtil {
     public static String getFullUrl(HttpServletRequest request, boolean proxyServer) {
         String queryString = getParameterString(request);
         String url = request.getRequestURL().toString();
-        if (StringUtil.isNotEmpty(queryString)) {
+        if (StringUtils.isNotEmpty(queryString)) {
             url = url + "?" + queryString;
         }
 
         if (!proxyServer) {
             url = url.replaceFirst(request.getContextPath(), "");
         }
-
-        if (url.endsWith("&")) {
+        String JudgmentValue = "&";
+        if (url.endsWith(JudgmentValue)) {
             url = url.substring(0, url.length() - 1);
         }
 
@@ -209,16 +209,17 @@ public class ServletUtil {
     }
 
     public static String getIp(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        String unknown = "unknown";
+        String ip = request.getHeader("x-forwarded-fo");
+        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
 
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
 
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
 

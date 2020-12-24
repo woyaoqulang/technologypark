@@ -11,11 +11,6 @@ import com.rowan.core.common.PageInfo;
  **/
 public class ZhPageHelper extends PageHelper {
 
-    public static final int defaultPageSize = 20;
-
-    public ZhPageHelper() {
-    }
-
     public static void startPage() {
         PageInfo<?> pageInfo = RequestContext.getPageInfo();
         if (pageInfo.getPageNo() <= 0 && pageInfo.getPageSize() <= 0) {

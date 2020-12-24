@@ -8,7 +8,11 @@ import org.springframework.util.ClassUtils;
 
 import java.lang.reflect.Method;
 
-
+/**
+ * @description: 
+ * @author: rowan
+ * @date: 2020-12-24 22:57:30
+ **/
 public class AopUtil {
     public static Method getSpecificMethod(ProceedingJoinPoint pjp) {
         MethodSignature methodSignature = (MethodSignature) pjp.getSignature();

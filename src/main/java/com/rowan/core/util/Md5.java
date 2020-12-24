@@ -7,7 +7,7 @@ import java.security.MessageDigest;
  * @author zhanghao
  * @date 2019-08-07
  **/
-public class MD5 {
+public class Md5 {
     public final static String encode(String s) {
         char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 

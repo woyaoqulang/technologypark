@@ -8,14 +8,9 @@ import java.util.Comparator;
  **/
 public class MapNumberKeyComparator<T> implements Comparator<T> {
 
-    protected MapNumberKeyComparator.Order order;
+    private Order order;
 
-    public MapNumberKeyComparator() {
-        this.order = MapNumberKeyComparator.Order.asc;
-    }
-
-    public MapNumberKeyComparator(MapNumberKeyComparator.Order order) {
-        this.order = MapNumberKeyComparator.Order.asc;
+    public MapNumberKeyComparator(Order order) {
         this.order = order;
     }
 
@@ -26,40 +21,27 @@ public class MapNumberKeyComparator<T> implements Comparator<T> {
         if (a instanceof String && b instanceof String) {
             String aStr = (String) a;
             String bStr = (String) b;
-            return aStr.compareToIgnoreCase(bStr) * this.order.sign;
+            return aStr.compareToIgnoreCase(bStr) * order.sign;
         } else if (a instanceof Number && b instanceof Number) {
             aa = (Long) a;
             bb = (Long) b;
-            return aa >= bb ? 1 * this.order.sign : -1 * this.order.sign;
+            return aa >= bb ? 1 * order.sign : -1 * order.sign;
         } else {
             throw new RuntimeException("指定按key排序时，key暂时只支持意义上的数字类型");
         }
     }
 
     public enum Order {
+        //倒序排列
         desc("倒序", -1),
         asc("正序", 1);
 
-        protected String name;
-        protected int sign;
+        private String name;
+        private int sign;
 
         Order(String name, int sign) {
             this.name = name;
             this.sign = sign;
-        }
-
-        public static String getName(int sign) {
-            MapNumberKeyComparator.Order[] var1 = values();
-            int var2 = var1.length;
-
-            for (int var3 = 0; var3 < var2; ++var3) {
-                MapNumberKeyComparator.Order c = var1[var3];
-                if (c.getSign() == sign) {
-                    return c.name;
-                }
-            }
-
-            return null;
         }
 
         public String getName() {

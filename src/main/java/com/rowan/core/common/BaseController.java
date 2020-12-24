@@ -1,11 +1,11 @@
 package com.rowan.core.common;
 
 import com.rowan.core.util.ServletUtil;
-import com.rowan.core.util.StringUtil;
 import com.rowan.core.util.TemplatesUtil;
 import com.rowan.core.web.RequestContext;
 import com.rowan.core.web.ZhPageHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -73,7 +73,7 @@ public class BaseController {
         BindingResult bindingResult = exception.getBindingResult();
         if (bindingResult.hasErrors()) {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
-            if(!allErrors.isEmpty()){
+            if (!allErrors.isEmpty()) {
                 return respond500(allErrors.get(0).getDefaultMessage());
             }
         }
@@ -98,7 +98,7 @@ public class BaseController {
 
     private boolean sendExceptionInfo(Exception exception) {
         String errorMessage = exception.getMessage();
-        if (StringUtil.isNotEmpty(errorMessage) && errorMessage.contains(EXCEPTION_MESSAGE)) {
+        if (StringUtils.isNotEmpty(errorMessage) && errorMessage.contains(EXCEPTION_MESSAGE)) {
             return true;
         } else {
             Map<String, String>[] requestInfoMap = ServletUtil.getClientInfoStat(this.request());

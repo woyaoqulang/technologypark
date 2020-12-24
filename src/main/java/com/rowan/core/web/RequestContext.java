@@ -21,7 +21,7 @@ import java.util.Map;
  **/
 public class RequestContext {
 
-    private static final ThreadLocal<RequestContext> contextThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<RequestContext> CONTEXT_THREAD_LOCAL = new ThreadLocal<>();
     private HttpSession session;
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -52,13 +52,13 @@ public class RequestContext {
                 requestContext.cookies.put(ck.getName(), ck);
             }
         }
-        contextThreadLocal.set(requestContext);
+        CONTEXT_THREAD_LOCAL.set(requestContext);
         return requestContext;
     }
 
     public static HttpServletRequest getRequest() {
         RequestContext requestContext = get();
-        return requestContext._getRequest();
+        return requestContext.getCurrentRequest();
     }
 
     /**
@@ -67,43 +67,39 @@ public class RequestContext {
      * @return
      */
     public static RequestContext get() {
-        return contextThreadLocal.get();
+        return CONTEXT_THREAD_LOCAL.get();
     }
 
     public static Model getModel() {
         RequestContext requestContext = get();
-        return requestContext == null ? null : requestContext._getModel();
+        return requestContext == null ? null : requestContext.getCurrentModel();
     }
 
     public void setModel(Model model) {
-        RequestContext requestContext = contextThreadLocal.get();
+        RequestContext requestContext = CONTEXT_THREAD_LOCAL.get();
         if (requestContext != null) {
-            requestContext._setModel(model);
-            contextThreadLocal.set(requestContext);
+            requestContext.setCurrentModel(model);
+            CONTEXT_THREAD_LOCAL.set(requestContext);
         }
     }
 
     public static HttpServletResponse getResponse() {
         RequestContext requestContext = get();
-        return requestContext == null ? null : requestContext._getResponse();
+        return requestContext == null ? null : requestContext.getCurrentResponse();
     }
 
     public static <T> PageInfo<T> getPageInfo() {
-        RequestContext requestContext = contextThreadLocal.get();
-        return requestContext == null ? null : requestContext._getPageInfo();
+        RequestContext requestContext = CONTEXT_THREAD_LOCAL.get();
+        return requestContext == null ? null : requestContext.getCurrentPageInfo();
     }
 
     public void setPageInfo(PageInfo<?> pageInfo) {
-        RequestContext requestContext = contextThreadLocal.get();
+        RequestContext requestContext = CONTEXT_THREAD_LOCAL.get();
         if (requestContext != null) {
-            requestContext._setPageInfo(pageInfo);
-            requestContext._setPageable(PageRequest.of(pageInfo.getPageNo(), pageInfo.getPageSize()));
-            contextThreadLocal.set(requestContext);
+            requestContext.setCurrentPageInfo(pageInfo);
+            requestContext.setCurrentPageable(PageRequest.of(pageInfo.getPageNo(), pageInfo.getPageSize()));
+            CONTEXT_THREAD_LOCAL.set(requestContext);
         }
-    }
-
-    private HttpServletRequest _getRequest() {
-        return request;
     }
 
     public void clearContext() {
@@ -115,30 +111,35 @@ public class RequestContext {
         this.pageInfo = null;
         this.pageable = null;
         this.handler = null;
-        contextThreadLocal.remove();
+        CONTEXT_THREAD_LOCAL.remove();
     }
 
-    private Model _getModel() {
+    private HttpServletRequest getCurrentRequest() {
+        return request;
+    }
+
+    private Model getCurrentModel() {
         return this.model;
     }
 
-    private HttpServletResponse _getResponse() {
+    private HttpServletResponse getCurrentResponse() {
         return this.response;
     }
 
-    private void _setModel(Model model) {
+    private void setCurrentModel(Model model) {
         this.model = model;
     }
 
-    private <T> PageInfo<T> _getPageInfo() {
+    private <T> PageInfo<T> getCurrentPageInfo() {
         return this.pageInfo;
     }
 
-    private void _setPageInfo(PageInfo<?> pageInfo) {
+    private void setCurrentPageInfo(PageInfo<?> pageInfo) {
         this.pageInfo = pageInfo;
     }
 
-    private void _setPageable(Pageable pageable) {
+    private void setCurrentPageable(Pageable pageable) {
         this.pageable = pageable;
     }
+
 }

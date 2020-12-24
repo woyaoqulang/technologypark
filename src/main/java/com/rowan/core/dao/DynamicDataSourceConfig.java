@@ -1,8 +1,9 @@
 package com.rowan.core.dao;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.rowan.core.util.StringUtil;
-import lombok.extern.apachecommons.CommonsLog;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.bind.Bindable;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.EnvironmentAware;
@@ -23,16 +24,25 @@ import java.util.Map;
  * @date 2019/9/30 18:31
  **/
 @Configuration
-@CommonsLog
 public class DynamicDataSourceConfig implements EnvironmentAware {
 
-    //默认数据源
+    private Logger log = LoggerFactory.getLogger(DynamicDataSourceConfig.class);
+
+    /**
+     * 默认数据源
+     */
     private static final String DEFAULT_NAME = "spring.custom.datasource.default-name";
-    //多数据源名称
+    /**
+     * 多数据源名称
+     */
     private static final String DATA_SOURCE_NAME = "spring.custom.datasource.name";
-    //数据源前缀
+    /**
+     * 数据源前缀
+     */
     private static final String DATA_SOURCE_PREFIX = "spring.custom.datasource";
-    //druid配置前缀
+    /**
+     * druid配置前缀
+     */
     private static final String DRUID_PREFIX = "spring.datasource.druid";
 
     private Map<String, DruidDataSource> customDataSource = new HashMap<>();
@@ -65,7 +75,7 @@ public class DynamicDataSourceConfig implements EnvironmentAware {
     @Bean(name = {"dynamicDataSource"})
     @Primary
     public DynamicDataSource dynamicDataSource() {
-        Map<Object, Object> targetDataSource = new HashMap<>();
+        Map<Object, Object> targetDataSource = new HashMap<>(10);
         initCustomDataSource();
         targetDataSource.putAll(customDataSource);
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
@@ -82,7 +92,7 @@ public class DynamicDataSourceConfig implements EnvironmentAware {
         String defaultName = environment.getProperty(DEFAULT_NAME);
         //所有数据源
         String dataSourceNames = environment.getProperty(DATA_SOURCE_NAME);
-        if (StringUtil.isEmpty(dataSourceNames)) {
+        if (StringUtils.isEmpty(dataSourceNames)) {
             log.error("多个数据源列表为空");
         } else {
             String[] split = dataSourceNames.split(",");

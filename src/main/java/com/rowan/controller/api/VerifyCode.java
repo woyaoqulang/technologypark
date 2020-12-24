@@ -70,14 +70,12 @@ public class VerifyCode {
      * @return 验证码字符串
      */
     public static String generateTextCode(int type, int length, String exChars) {
-
         if (length <= 0) {
             return "";
         }
         StringBuffer code = new StringBuffer();
         int i = 0;
         Random r = new Random();
-
         switch (type) {
             // 仅数字
             case TYPE_NUM_ONLY:
@@ -90,7 +88,6 @@ public class VerifyCode {
                     }
                 }
                 break;
-
             // 仅字母（即大写字母、小写字母混合）
             case TYPE_LETTER_ONLY:
                 while (i < length) {
@@ -101,7 +98,6 @@ public class VerifyCode {
                     }
                 }
                 break;
-
             // 数字、大写字母、小写字母混合
             case TYPE_ALL_MIXED:
                 while (i < length) {
@@ -112,7 +108,6 @@ public class VerifyCode {
                     }
                 }
                 break;
-
             // 数字、大写字母混合
             case TYPE_NUM_UPPER:
                 while (i < length) {
@@ -123,7 +118,6 @@ public class VerifyCode {
                     }
                 }
                 break;
-
             // 数字、小写字母混合
             case TYPE_NUM_LOWER:
                 while (i < length) {
@@ -134,7 +128,6 @@ public class VerifyCode {
                     }
                 }
                 break;
-
             // 仅大写字母
             case TYPE_UPPER_ONLY:
                 while (i < length) {
@@ -145,7 +138,6 @@ public class VerifyCode {
                     }
                 }
                 break;
-
             // 仅小写字母
             case TYPE_LOWER_ONLY:
                 while (i < length) {
@@ -159,7 +151,8 @@ public class VerifyCode {
             // 仅小写字母
             case TYPE_HANZI_ONLY:
                 String word = "好一路阳光子无开月了的比小山古天中石头井火大西木开人也叶九七六五合文只个鱼羊哈么点四生件格不步布各你田红蓝来很春下画京左百白东关工共足方尺才梦见查着去区曲寻早可上丰爱呵刘";
-                for (int flag = 0; flag < 4; flag++) {
+                int size =4;
+                for (int flag = 0; flag < size; flag++) {
                     Integer number = r.nextInt(85);
                     code.append(word, number, number + 1);
                 }
@@ -167,7 +160,6 @@ public class VerifyCode {
             default:
                 break;
         }
-
         return code.toString();
     }
 
@@ -206,12 +198,6 @@ public class VerifyCode {
                 g.drawLine(x, y, x1, y1);
             }
         }
-
-        // 写验证码
-
-        // g.setColor(getRandomColor());
-        // g.setColor(isSimpleColor?Color.BLACK:Color.WHITE);
-
         // 字体大小为图片高度的80%
         int fsize = (int) (height * 0.6);
         int fx = height - fsize;
@@ -220,7 +206,8 @@ public class VerifyCode {
         g.setFont(new Font("宋体", Font.BOLD, 15));
         // 写验证码字符
         for (int i = 0; i < textCode.length(); i++) {
-            fy = randomLocation ? (int) ((Math.random() * 0.3 + 0.6) * height) : fy;// 每个字符高低是否随机
+            // 每个字符高低是否随机
+            fy = randomLocation ? (int) ((Math.random() * 0.3 + 0.6) * height) : fy;
             g.setColor(foreColor == null ? getRandomColor() : foreColor);
             g.drawString(textCode.charAt(i) + "", fx, fy);
             fx += fsize * 1.1;
