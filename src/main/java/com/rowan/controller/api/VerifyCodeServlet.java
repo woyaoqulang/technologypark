@@ -24,12 +24,6 @@ public class VerifyCodeServlet extends HttpServlet {
 
     private static final Logger log = LoggerFactory.getLogger(VerifyCodeServlet.class);
 
-    private static final String TYPE = "type";
-
-    private static final String WIDTH = "width";
-    
-    private static final String HEIGHT = "height";
-
     /**
      *
      */
@@ -56,9 +50,10 @@ public class VerifyCodeServlet extends HttpServlet {
 
         // 生成验证码，写入用户session
         String verifyCode = VerifyCode.generateTextCode(VerifyCode.TYPE_HANZI_ONLY, 4, "0oOilJI1");
-        if (StringUtils.isNotEmpty(request.getParameter(TYPE))) {
+        String type = "type";
+        if (StringUtils.isNotEmpty(request.getParameter(type))) {
             try {
-                verifyCode = VerifyCode.generateTextCode(Integer.valueOf(request.getParameter("type")), 4, "0oOilJI1");
+                verifyCode = VerifyCode.generateTextCode(Integer.valueOf(request.getParameter(type)), 4, "0oOilJI1");
             } catch (Exception e) {
                 log.error("异常:", e);
             }
@@ -66,12 +61,14 @@ public class VerifyCodeServlet extends HttpServlet {
         request.getSession().setAttribute(VerifyCode.VERIFY_TYPE_COMMENT, verifyCode);
         Integer width = 80;
         Integer height = 22;
+        String widthParam = "width";
+        String heightParam = "height";
         try {
-            if (StringUtils.isNotEmpty(request.getParameter(WIDTH))) {
-                width = Integer.valueOf(request.getParameter(WIDTH));
+            if (StringUtils.isNotEmpty(request.getParameter(widthParam))) {
+                width = Integer.valueOf(request.getParameter(widthParam));
             }
-            if (StringUtils.isNotEmpty(request.getParameter(HEIGHT))) {
-                height = Integer.valueOf(request.getParameter(HEIGHT));
+            if (StringUtils.isNotEmpty(request.getParameter(heightParam))) {
+                height = Integer.valueOf(request.getParameter(heightParam));
             }
             /**
              * 渗透性测试，参数传负数时，页面会显示500
