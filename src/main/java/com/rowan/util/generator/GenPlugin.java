@@ -1,6 +1,6 @@
 package com.rowan.util.generator;
 
-import com.rowan.core.constant.SeparatorConstant;
+import com.rowan.core.constant.CharacterConstant;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
@@ -49,7 +49,7 @@ public class GenPlugin extends PluginAdapter {
     public void setProperties(Properties properties) {
         super.setProperties(properties);
         String mappers = this.properties.getProperty("mappers");
-        for (String mapper : mappers.split(SeparatorConstant.EN_COMMA_CHARACTER)) {
+        for (String mapper : mappers.split(CharacterConstant.EN_COMMA)) {
             this.mappers.add(mapper);
         }
     }

@@ -1,6 +1,7 @@
 package com.rowan.core.util;
 
 import com.rowan.core.constant.BaseConstant;
+import com.rowan.core.constant.CharacterConstant;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -204,7 +205,7 @@ public final class CookieUtils {
         String domainName = null;
 
         String serverName = request.getRequestURL().toString();
-        if (serverName == null || serverName.equals("")) {
+        if (serverName == null || CharacterConstant.BLANK.equals(serverName)) {
             domainName = "";
         } else {
             serverName = serverName.toLowerCase();
