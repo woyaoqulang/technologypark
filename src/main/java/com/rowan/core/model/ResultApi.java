@@ -71,7 +71,6 @@ public class ResultApi<T> extends Object implements Serializable {
 
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
-        //this.errorMessage = ErrorCode.errorMap.get(errorCode);
     }
 
     public Object getErrorMessage() {

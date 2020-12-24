@@ -8,10 +8,13 @@ import com.rowan.core.util.StringUtil;
 import com.rowan.core.util.TemplatesUtil;
 import com.rowan.core.web.RequestContext;
 import com.rowan.core.web.ZhPageHelper;
-import lombok.extern.apachecommons.CommonsLog;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,7 +35,7 @@ import java.util.Map;
  * @author zhanghao
  * @date 2019/8/28 14:47
  **/
-@CommonsLog
+@Slf4j
 public class BaseController {
 
     public static final Integer PAGESIZE_DEFAULT = 200;
@@ -63,6 +67,24 @@ public class BaseController {
             this.handException(exception, false);
             return null;
         }
+    }
+
+
+    @ExceptionHandler({BindException.class})
+    @ResponseBody
+    public ResultApi<String> paramExceptionHandler(BindException exception) {
+        BindingResult bindingResult = exception.getBindingResult();
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            if(!allErrors.isEmpty()){
+                return respond500(allErrors.get(0).getDefaultMessage());
+            }
+        }
+        return respondSuccess();
+    }
+
+    protected <T> ResultApi<T> respondSuccess() {
+        return ResultApiBuilder.buildResultApi("0");
     }
 
     protected <T> ResultApi<T> respondSuccess(T result) {
