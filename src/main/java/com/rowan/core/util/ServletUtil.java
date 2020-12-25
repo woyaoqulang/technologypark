@@ -76,8 +76,8 @@ public class ServletUtil {
         Map<String, String> infoMap = new TreeMap();
         String getMethod = request.getMethod();
         infoMap.put("getMethod", getMethod);
-        String getRequestURI = request.getRequestURI();
-        infoMap.put("getRequestURI", getRequestURI);
+        String getRequestUrl = request.getRequestURI();
+        infoMap.put("getRequestURI", getRequestUrl);
         String getServletPath = request.getServletPath();
         infoMap.put("getServletPath", getServletPath);
         String getServerName = request.getServerName();
@@ -116,8 +116,8 @@ public class ServletUtil {
         infoMap.put("getRemoteUser", getRemoteUser);
         String getRequestedSessionId = request.getRequestedSessionId();
         infoMap.put("getRequestedSessionId", getRequestedSessionId);
-        StringBuffer getRequestURL = request.getRequestURL();
-        infoMap.put("getRequestURL", getRequestURL.toString());
+        StringBuffer getRequestUrlSb = request.getRequestURL();
+        infoMap.put("getRequestURL", getRequestUrlSb.toString());
         String getScheme = request.getScheme();
         infoMap.put("getScheme", getScheme);
         ServletContext getServletContext = request.getServletContext();
@@ -175,8 +175,8 @@ public class ServletUtil {
         if (!proxyServer) {
             url = url.replaceFirst(request.getContextPath(), "");
         }
-        String JudgmentValue = "&";
-        if (url.endsWith(JudgmentValue)) {
+        String judgmentValue = "&";
+        if (url.endsWith(judgmentValue)) {
             url = url.substring(0, url.length() - 1);
         }
 

@@ -29,7 +29,8 @@ public class Demo1 {
         if (queueMap.size() < size) {
             test(queueMap);
         }
-
-
+        int t = 89;
+        String exChars = "fff";
+        System.out.println(t <= 65);
     }
 }
