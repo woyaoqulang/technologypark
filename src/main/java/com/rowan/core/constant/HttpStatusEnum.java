@@ -5,35 +5,45 @@ package com.rowan.core.constant;
  * @author: zhangHao
  * @date: 2020/12/24 17:23
  **/
-public enum responseCodeEnum {
+public enum HttpStatusEnum {
 
     //枚举定义
-    STATUS_200(200, "成功"),
+    STATUS_200(200, "请求成功"),
     STATUS_500(500, "接口内部错误"),
     STATUS_600(600, "业务提示消息"),
     STATUS_401(401, "未登录"),
     STATUS_400(400, "参数错误"),
     STATUS_404(404, "找不到资源");
+
+    public static String getMessage(Integer code) {
+        for (HttpStatusEnum e : HttpStatusEnum.values()) {
+            if (e.statusCode.equals(code)) {
+                return e.message;
+            }
+        }
+        return "";
+    }
+
     /**
-     * 错误码
+     * 状态码
      */
-    private Integer code;
+    private Integer statusCode;
     /**
      * 错误信息
      */
     private String message;
 
-    responseCodeEnum(Integer code, String message) {
-        this.code = code;
+    HttpStatusEnum(Integer code, String message) {
+        this.statusCode = code;
         this.message = message;
     }
 
     public Integer getCode() {
-        return code;
+        return statusCode;
     }
 
     public void setCode(Integer code) {
-        this.code = code;
+        this.statusCode = code;
     }
 
     public String getMessage() {

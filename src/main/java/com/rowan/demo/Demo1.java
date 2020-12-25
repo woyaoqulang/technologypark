@@ -1,5 +1,7 @@
 package com.rowan.demo;
 
+import com.rowan.core.constant.HttpStatusEnum;
+
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +17,7 @@ public class Demo1 {
         String s = "00012355666";
         s = s.replaceAll("^(0+)", "");
         System.out.println(s);
+        System.out.println(HttpStatusEnum.getMessage(200));
     }
 
 
@@ -22,7 +25,8 @@ public class Demo1 {
         Set<String> strings = new HashSet<>();
         strings.add("1234");
         queueMap.put(queueMap.size() + "", strings);
-        if (queueMap.size() < 10) {
+        int size = 10;
+        if (queueMap.size() < size) {
             test(queueMap);
         }
 

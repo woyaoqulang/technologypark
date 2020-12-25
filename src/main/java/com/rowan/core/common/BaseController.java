@@ -35,7 +35,7 @@ import java.util.Map;
 @Slf4j
 public class BaseController {
 
-    public static final Integer PAGESIZE_DEFAULT = 200;
+    public static final Integer PAGE_SIZE_DEFAULT = 200;
 
     public static final String EXCEPTION_MESSAGE = "java.io.IOException: Broken pipe";
 
@@ -48,7 +48,7 @@ public class BaseController {
         if (pageInfo.getPageNo() < 1) {
             pageInfo.setPageNo(1);
         }
-        if (pageInfo.getPageSize() > PAGESIZE_DEFAULT) {
+        if (pageInfo.getPageSize() > PAGE_SIZE_DEFAULT) {
             pageInfo.setPageSize(200);
         }
         RequestContext.get().setPageInfo(pageInfo);
@@ -59,14 +59,13 @@ public class BaseController {
     public ResultApi<String> exception(Exception exception) throws Exception {
         sendExceptionInfo(exception);
         if (ServletUtil.isAjaxRequest()) {
-            return respond500("Server Error");
+            return ResultApi.error500("Server Error");
         } else {
             this.handException(exception, false);
             return null;
         }
     }
-
-
+    
     @ExceptionHandler({BindException.class})
     @ResponseBody
     public ResultApi<String> paramExceptionHandler(BindException exception) {
@@ -74,26 +73,10 @@ public class BaseController {
         if (bindingResult.hasErrors()) {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             if (!allErrors.isEmpty()) {
-                return respond500(allErrors.get(0).getDefaultMessage());
+                return ResultApi.error(400, allErrors.get(0).getDefaultMessage());
             }
         }
-        return respondSuccess();
-    }
-
-    protected <T> ResultApi<T> respondSuccess() {
-        return ResultApiBuilder.buildResultApi("0");
-    }
-
-    protected <T> ResultApi<T> respondSuccess(T result) {
-        return ResultApiBuilder.buildResultApi(result);
-    }
-
-    protected <T> ResultApi<T> respond500(Object errorMessage) {
-        return ResultApiBuilder.buildResultApi("500", errorMessage);
-    }
-
-    protected <T> ResultApi<T> respond500(T result, Object errorMessage) {
-        return ResultApiBuilder.buildResultApi("500", result, errorMessage);
+        return ResultApi.success();
     }
 
     private boolean sendExceptionInfo(Exception exception) {

@@ -40,13 +40,13 @@ public class UserController extends BaseController {
         List<User> result = userService.getUserInfoList();
         PageInfo<User> pageInfo = pageInfo();
         pageInfo.setResultList(result);
-        return respondSuccess(pageInfo);
+        return ResultApi.success(pageInfo);
     }
 
     @ApiOperation("新增用户")
     @GetMapping("/saveUserInfo")
     public ResultApi<User> saveUserInfo(@Valid UserDto userDto) {
-        return respondSuccess(userService.saveUserInfo(userDto));
+        return ResultApi.success(userService.saveUserInfo(userDto));
     }
 
 

@@ -1,5 +1,6 @@
 package com.rowan.core.common;
 
+import com.rowan.core.constant.HttpStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -17,43 +18,66 @@ public class ResultApi<T> implements Serializable {
 
     private static final long serialVersionUID = 830054763344341448L;
 
-    @ApiModelProperty("错误码,几个固定值为: 0:成功,400:参数不合法,401:未认证，未登录，一般需要跳转到登录界面要求登录,403:已登录，但是无权限，拒绝访问,404:资源找不到,500:错误提示。600:接口请求正常，但是有来自接口的业务提示")
-    private String errorCode;
+    @ApiModelProperty("状态码,几个固定值为: 200:成功,400:参数不合法,401:未认证，未登录，一般需要跳转到登录界面要求登录,403:已登录，但是无权限，拒绝访问,404:资源找不到,500:错误提示。600:接口请求正常，但是有来自接口的业务提示")
+    private Integer code;
     @ApiModelProperty("对应错误消息描述，适合单个错误消息")
-    private Object errorMessage;
+    private Object message;
     @ApiModelProperty("对应错误消息描述，适合多个错误消息")
-    private List<Object> errorMessageList;
+    private List<Object> messageList;
     @ApiModelProperty("返回的结果集")
     private T result;
 
-
-    public static <T> ResultApi<T> ok() {
-        return null;
+    public static <T> ResultApi<T> success(T result) {
+        ResultApi<T> resultApi = new ResultApi();
+        resultApi.setCode(200);
+        resultApi.setResult(result);
+        resultApi.setMessage(HttpStatusEnum.getMessage(200));
+        return resultApi;
     }
 
-
-    public String getErrorCode() {
-        return errorCode;
+    public static <T> ResultApi<T> success() {
+        ResultApi<T> resultApi = new ResultApi();
+        resultApi.setCode(200);
+        resultApi.setMessage(HttpStatusEnum.getMessage(200));
+        return resultApi;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+    public static <T> ResultApi<T> error500(String message) {
+        ResultApi<T> resultApi = new ResultApi();
+        resultApi.setCode(500);
+        resultApi.setMessage(message);
+        return resultApi;
     }
 
-    public Object getErrorMessage() {
-        return errorMessage;
+    public static <T> ResultApi<T> error(Integer statusCode, String message) {
+        ResultApi<T> resultApi = new ResultApi();
+        resultApi.setCode(statusCode);
+        resultApi.setMessage(message);
+        return resultApi;
     }
 
-    public void setErrorMessage(Object errorMessage) {
-        this.errorMessage = errorMessage;
+    public Integer getCode() {
+        return code;
     }
 
-    public List<Object> getErrorMessageList() {
-        return errorMessageList;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
-    public void setErrorMessageList(List<Object> errorMessageList) {
-        this.errorMessageList = errorMessageList;
+    public Object getMessage() {
+        return message;
+    }
+
+    public void setMessage(Object message) {
+        this.message = message;
+    }
+
+    public List<Object> getMessageList() {
+        return messageList;
+    }
+
+    public void setMessageList(List<Object> messageList) {
+        this.messageList = messageList;
     }
 
     public T getResult() {
