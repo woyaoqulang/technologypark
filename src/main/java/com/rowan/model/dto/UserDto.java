@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
+
 /**
  * @description: 用户表
  * @author: rowan
