@@ -8,10 +8,13 @@ import com.rowan.model.dto.UserDto;
 import com.rowan.model.po.User;
 import com.rowan.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,12 +52,12 @@ public class UserController extends BaseController {
         return ResultApi.success(userService.saveUserInfo(userDto));
     }
 
-    @ApiOperation("新增用户")
-    @GetMapping("/login")
-    public ResultApi<User> login(@Valid UserDto userDto) {
-
-
-        return ResultApi.success(userService.saveUserInfo(userDto));
+    @ApiOperation("登录")
+    @PostMapping("/login")
+    @ApiImplicitParams({@ApiImplicitParam(name = "username", value = "用户名", required = true),
+            @ApiImplicitParam(name = "password", value = "密码", required = true)})
+    public ResultApi<User> login(String username, String password) {
+        return ResultApi.success();
     }
 
 

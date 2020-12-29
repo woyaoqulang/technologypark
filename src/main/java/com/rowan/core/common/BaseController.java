@@ -65,7 +65,7 @@ public class BaseController {
             return null;
         }
     }
-    
+
     @ExceptionHandler({BindException.class})
     @ResponseBody
     public ResultApi<String> paramExceptionHandler(BindException exception) {
@@ -78,6 +78,33 @@ public class BaseController {
         }
         return ResultApi.success();
     }
+
+    @ExceptionHandler({IllegalArgumentException.class})
+    @ResponseBody
+    protected ResultApi<String> exceptionIllegalArgumentException(Exception exception) throws Exception {
+        this.sendExceptionInfo(exception);
+        StackTraceElement[] stackTrace = exception.getStackTrace();
+        String className = stackTrace[1].getClassName();
+        String errorMessage = exception.getMessage();
+        boolean isAssert = true;
+        if (!className.endsWith("ZhAssert")) {
+            errorMessage = "Server Error";
+            isAssert = false;
+        }
+        if (ServletUtil.isAjaxRequest()) {
+            ResultApi<String> respond = null;
+            if (isAssert) {
+                respond = ResultApi.error(600, errorMessage);
+            } else {
+                respond = ResultApi.error500(errorMessage);
+            }
+            return respond;
+        } else {
+            this.handException(exception, isAssert);
+            return null;
+        }
+    }
+
 
     private boolean sendExceptionInfo(Exception exception) {
         String errorMessage = exception.getMessage();
