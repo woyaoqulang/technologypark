@@ -49,5 +49,13 @@ public class UserController extends BaseController {
         return ResultApi.success(userService.saveUserInfo(userDto));
     }
 
+    @ApiOperation("新增用户")
+    @GetMapping("/login")
+    public ResultApi<User> login(@Valid UserDto userDto) {
+
+
+        return ResultApi.success(userService.saveUserInfo(userDto));
+    }
+
 
 }
