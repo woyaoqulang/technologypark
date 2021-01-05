@@ -4,6 +4,7 @@ package com.rowan.controller.user;
 import com.rowan.core.common.BaseController;
 import com.rowan.core.common.PageInfo;
 import com.rowan.core.common.ResultApi;
+import com.rowan.core.common.ZhAssert;
 import com.rowan.model.dto.UserDto;
 import com.rowan.model.po.User;
 import com.rowan.service.UserService;
@@ -57,6 +58,9 @@ public class UserController extends BaseController {
     @ApiImplicitParams({@ApiImplicitParam(name = "username", value = "用户名", required = true),
             @ApiImplicitParam(name = "password", value = "密码", required = true)})
     public ResultApi<User> login(String username, String password) {
+        ZhAssert.hasText(username, "用户名不为空");
+        ZhAssert.hasText(password, "密码不能为空");
+        userService.login(username,password);
         return ResultApi.success();
     }
 

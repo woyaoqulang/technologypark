@@ -39,6 +39,12 @@ public class UserService {
         return users;
     }
 
+    /**
+     * 保存用户信息
+     *
+     * @param userDto
+     * @return
+     */
     public User saveUserInfo(UserDto userDto) {
         User user = new User();
         BeanUtils.copyProperties(userDto, user);
@@ -48,4 +54,6 @@ public class UserService {
         return user;
     }
 
+    public void login(String username, String password) {
+    }
 }

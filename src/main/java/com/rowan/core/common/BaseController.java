@@ -122,7 +122,7 @@ public class BaseController {
     }
 
     public void sendExceptionInfo(Map<String, String>[] requestInfoMap, Exception ex) {
-        log.error("系统异常," + ex.getMessage(), ex);
+        log.info("系统异常," + ex.getMessage(), ex);
     }
 
     private void handException(Exception exception, boolean isAssert) throws Exception {
