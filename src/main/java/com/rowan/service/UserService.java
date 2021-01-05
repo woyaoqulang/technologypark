@@ -61,6 +61,8 @@ public class UserService {
         map.put("username", username);
         map.put("password", password);
         User user = userMapper.selectByMap(map);
-
+        if (user != null) {
+            Long id = user.getId();
+        }
     }
 }
