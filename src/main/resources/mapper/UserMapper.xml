@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rowan.mapper.UserMapper">
+
+    <resultMap type="com.rowan.model.po.User" id="UserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="source" column="source" jdbcType="INTEGER"/>
+        <result property="role" column="role" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="selectByMap" parameterType="Map" resultMap="UserMap">
+        select * from user
+        <where>
+            <if test="username != null">
+                username = #{username}
+            </if>
+            <if test="password != null">
+                and password = #{password}
+            </if>
+        </where>
+    </select>
+
+</mapper>

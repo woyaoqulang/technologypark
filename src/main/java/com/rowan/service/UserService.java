@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户信息
@@ -55,5 +57,10 @@ public class UserService {
     }
 
     public void login(String username, String password) {
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("username", username);
+        map.put("password", password);
+        User user = userMapper.selectByMap(map);
+
     }
 }
