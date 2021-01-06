@@ -1,10 +1,14 @@
 package com.rowan.controller.user;
 
 
+import com.rowan.constants.CookieConstant;
 import com.rowan.core.common.BaseController;
 import com.rowan.core.common.PageInfo;
 import com.rowan.core.common.ResultApi;
 import com.rowan.core.common.ZhAssert;
+import com.rowan.core.constant.HttpStatusEnum;
+import com.rowan.core.util.CookieUtils;
+import com.rowan.core.web.RequestContext;
 import com.rowan.model.dto.UserDto;
 import com.rowan.model.po.User;
 import com.rowan.service.UserService;
@@ -19,6 +23,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -44,24 +50,30 @@ public class UserController extends BaseController {
         List<User> result = userService.getUserInfoList();
         PageInfo<User> pageInfo = pageInfo();
         pageInfo.setResultList(result);
-        return ResultApi.success(pageInfo);
+        return ResultApi.ok(pageInfo);
     }
 
     @ApiOperation("新增用户")
     @GetMapping("/saveUserInfo")
     public ResultApi<User> saveUserInfo(@Valid UserDto userDto) {
-        return ResultApi.success(userService.saveUserInfo(userDto));
+        return ResultApi.ok(userService.saveUserInfo(userDto));
     }
 
     @ApiOperation("登录")
     @PostMapping("/login")
     @ApiImplicitParams({@ApiImplicitParam(name = "username", value = "用户名", required = true),
             @ApiImplicitParam(name = "password", value = "密码", required = true)})
-    public ResultApi<User> login(String username, String password) {
+    public ResultApi<String> login(String username, String password) {
         ZhAssert.hasText(username, "用户名不为空");
         ZhAssert.hasText(password, "密码不能为空");
-        userService.login(username,password);
-        return ResultApi.success();
+        ResultApi<String> result = userService.login(username, password);
+        if (HttpStatusEnum.STATUS_200.getCode().equals(result.getCode())) {
+            String token = result.getResult();
+            HttpServletRequest request = RequestContext.getRequest();
+            HttpServletResponse response = RequestContext.getResponse();
+            CookieUtils.setCookie(request, response, CookieConstant.LOGIN, token);
+        }
+        return result;
     }
 
 

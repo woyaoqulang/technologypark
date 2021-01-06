@@ -5,6 +5,6 @@ package com.rowan.constants;
  * @author: rowan
  * @date: 2020-12-29 16:52:7
  **/
-public class RedisConstants {
-    public final static String LOGIN_TOKEN = "loginToken_";
+public class RedisConstant {
+    public final static String LOGIN = "loginToken_";
 }

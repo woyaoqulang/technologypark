@@ -50,7 +50,7 @@ public class RedisDao {
         return result;
     }
 
-    public boolean setForSeconds(String key, Object value, Long expireTime) {
+    public boolean setForSeconds(String key, Object value, long expireTime) {
         boolean result = false;
         if (set(key, value) && expire(key, expireTime, TimeUnit.SECONDS)) {
             result = true;
@@ -58,7 +58,7 @@ public class RedisDao {
         return result;
     }
 
-    public boolean setForMinutes(String key, Object value, Long expireTime) {
+    public boolean setForMinutes(String key, Object value, long expireTime) {
         boolean result = false;
         if (set(key, value) && expire(key, expireTime, TimeUnit.MINUTES)) {
             result = true;
@@ -66,7 +66,7 @@ public class RedisDao {
         return result;
     }
 
-    public boolean setForHour(String key, Object value, Long expireTime) {
+    public boolean setForHour(String key, Object value, long expireTime) {
         boolean result = false;
         if (set(key, value) && expire(key, expireTime, TimeUnit.HOURS)) {
             result = true;
@@ -74,7 +74,7 @@ public class RedisDao {
         return result;
     }
 
-    public boolean setForDay(String key, Object value, Long expireTime) {
+    public boolean setForDay(String key, Object value, long expireTime) {
         boolean result = false;
         if (set(key, value) && expire(key, expireTime, TimeUnit.DAYS)) {
             result = true;
@@ -90,7 +90,7 @@ public class RedisDao {
      * @param timeUnit   失效类型
      * @return
      */
-    public boolean expire(String key, Long expireTime, TimeUnit timeUnit) {
+    public boolean expire(String key, long expireTime, TimeUnit timeUnit) {
         boolean result = false;
         if (timeUnit != null) {
             try {

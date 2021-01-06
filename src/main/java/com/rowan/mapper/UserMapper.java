@@ -17,5 +17,5 @@ public interface UserMapper extends MybatisBaseMapper<User> {
      * @param params
      * @return
      */
-    User selectByMap(Map<String, Object> params);
+    User selectUserInfoByMap(Map<String, Object> params);
 }

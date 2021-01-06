@@ -1,6 +1,10 @@
 package com.rowan.service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.rowan.constants.RedisConstant;
+import com.rowan.core.common.ResultApi;
 import com.rowan.core.dao.DataSource;
+import com.rowan.core.dao.RedisDao;
 import com.rowan.core.util.Md5;
 import com.rowan.mapper.UserMapper;
 import com.rowan.model.dto.UserDto;
@@ -10,10 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 用户信息
@@ -28,6 +29,9 @@ public class UserService {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    RedisDao redisDao;
 
     /**
      * 获取用户登陆列表
@@ -56,13 +60,18 @@ public class UserService {
         return user;
     }
 
-    public void login(String username, String password) {
+    public ResultApi<String> login(String username, String password) {
         Map<String, Object> map = new HashMap<>(2);
         map.put("username", username);
-        map.put("password", password);
-        User user = userMapper.selectByMap(map);
-        if (user != null) {
-            Long id = user.getId();
+        map.put("password", Md5.encode(password));
+        User user = userMapper.selectUserInfoByMap(map);
+        if (user == null) {
+            return ResultApi.build(600, "用户名或密码不正确");
         }
+        //token随机生成，可以换成更安全的生成规则
+        String token = UUID.randomUUID().toString();
+        user.setPassword(null);
+        redisDao.setForHour(RedisConstant.LOGIN + token, JSONObject.toJSONString(user), 3);
+        return ResultApi.ok(token);
     }
 }

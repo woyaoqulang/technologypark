@@ -27,7 +27,7 @@ public class ResultApi<T> implements Serializable {
     @ApiModelProperty("返回的结果集")
     private T result;
 
-    public static <T> ResultApi<T> success(T result) {
+    public static <T> ResultApi<T> ok(T result) {
         ResultApi<T> resultApi = new ResultApi();
         resultApi.setCode(200);
         resultApi.setResult(result);
@@ -35,21 +35,21 @@ public class ResultApi<T> implements Serializable {
         return resultApi;
     }
 
-    public static <T> ResultApi<T> success() {
+    public static <T> ResultApi<T> ok() {
         ResultApi<T> resultApi = new ResultApi();
         resultApi.setCode(200);
         resultApi.setMessage(HttpStatusEnum.getMessage(200));
         return resultApi;
     }
 
-    public static <T> ResultApi<T> error500(String message) {
+    public static <T> ResultApi<T> build500(String message) {
         ResultApi<T> resultApi = new ResultApi();
         resultApi.setCode(500);
         resultApi.setMessage(message);
         return resultApi;
     }
 
-    public static <T> ResultApi<T> error(Integer statusCode, String message) {
+    public static <T> ResultApi<T> build(Integer statusCode, String message) {
         ResultApi<T> resultApi = new ResultApi();
         resultApi.setCode(statusCode);
         resultApi.setMessage(message);

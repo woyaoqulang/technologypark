@@ -59,7 +59,7 @@ public class BaseController {
     public ResultApi<String> exception(Exception exception) throws Exception {
         sendExceptionInfo(exception);
         if (ServletUtil.isAjaxRequest()) {
-            return ResultApi.error500("Server Error");
+            return ResultApi.build500("Server Error");
         } else {
             this.handException(exception, false);
             return null;
@@ -73,10 +73,10 @@ public class BaseController {
         if (bindingResult.hasErrors()) {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             if (!allErrors.isEmpty()) {
-                return ResultApi.error(400, allErrors.get(0).getDefaultMessage());
+                return ResultApi.build(400, allErrors.get(0).getDefaultMessage());
             }
         }
-        return ResultApi.success();
+        return ResultApi.ok();
     }
 
     @ExceptionHandler({IllegalArgumentException.class})
@@ -94,9 +94,9 @@ public class BaseController {
         if (ServletUtil.isAjaxRequest()) {
             ResultApi<String> respond = null;
             if (isAssert) {
-                respond = ResultApi.error(600, errorMessage);
+                respond = ResultApi.build(600, errorMessage);
             } else {
-                respond = ResultApi.error500(errorMessage);
+                respond = ResultApi.build500(errorMessage);
             }
             return respond;
         } else {

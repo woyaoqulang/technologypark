@@ -15,7 +15,7 @@
         <result property="role" column="role" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="selectByMap" parameterType="Map" resultMap="UserMap">
+    <select id="selectUserInfoByMap" parameterType="Map" resultMap="UserMap">
         select * from user
         <where>
             <if test="username != null">
@@ -25,6 +25,7 @@
                 and password = #{password}
             </if>
         </where>
+        limit 1
     </select>
 
 </mapper>
