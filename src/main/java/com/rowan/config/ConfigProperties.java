@@ -1,4 +1,4 @@
-package com.rowan.core.config;
+package com.rowan.config;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Value;

@@ -57,6 +57,7 @@ public class UserService {
         user.setPassword(Md5.encode(user.getPassword()));
         user.setCreateTime(new Date());
         userMapper.insertSelective(user);
+        int a = 5 / 0;
         return user;
     }
 
