@@ -36,7 +36,7 @@ import java.util.List;
  */
 @Api(tags = "用户")
 @RestController
-@RequestMapping("/technology")
+@RequestMapping("/user")
 @CommonsLog
 public class UserController extends BaseController {
 
