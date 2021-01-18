@@ -7,9 +7,8 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.interceptor.*;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,17 +24,26 @@ public class TransactionConfig {
 
     @Bean("txAdvice")
     public TransactionInterceptor createTransactionInterceptor() {
+        //只读事务
         RuleBasedTransactionAttribute readOnlyTx = new RuleBasedTransactionAttribute();
         readOnlyTx.setReadOnly(true);
         readOnlyTx.setPropagationBehavior(TransactionDefinition.PROPAGATION_NOT_SUPPORTED);
-
+        //如果存在事务就加入当前事务，如果没有加创建一个事务
         RuleBasedTransactionAttribute requiredTx = new RuleBasedTransactionAttribute();
         requiredTx.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-        List<RollbackRuleAttribute> attributeList = new ArrayList<>();
-
+        requiredTx.setRollbackRules(Collections.singletonList(new RollbackRuleAttribute(Exception.class)));
+        requiredTx.setTimeout(10);
         //通过方法名的匹配来寻找TransactionAttribute
         NameMatchTransactionAttributeSource source = new NameMatchTransactionAttributeSource();
         Map<String, TransactionAttribute> txMap = new HashMap<>(10);
+        txMap.put("save*", requiredTx);
+        txMap.put("add*", requiredTx);
+        txMap.put("insert*", requiredTx);
+        txMap.put("update*", requiredTx);
+        txMap.put("delete*", requiredTx);
+        txMap.put("del*", requiredTx);
+        txMap.put("get*", readOnlyTx);
+        txMap.put("select*", readOnlyTx);
         source.setNameMap(txMap);
         TransactionInterceptor tsi = new TransactionInterceptor(transactionManager, source);
         return tsi;
