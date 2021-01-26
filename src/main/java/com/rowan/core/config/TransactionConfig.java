@@ -1,5 +1,7 @@
 package com.rowan.core.config;
 
+import org.springframework.aop.aspectj.AspectJExpressionPointcut;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,4 +50,15 @@ public class TransactionConfig {
         TransactionInterceptor tsi = new TransactionInterceptor(transactionManager, source);
         return tsi;
     }
+
+    @Bean
+    public DefaultPointcutAdvisor defaultPointcutAdvisor(TransactionInterceptor txAdvice) {
+        DefaultPointcutAdvisor pointcutAdvisor = new DefaultPointcutAdvisor();
+        pointcutAdvisor.setAdvice(txAdvice);
+        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
+        pointcut.setExpression("execution (* com.*.service.*.*(..))");
+        pointcutAdvisor.setPointcut(pointcut);
+        return pointcutAdvisor;
+    }
+
 }
