@@ -23,10 +23,22 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Swagger2Config {
 
     @Bean
+    public Docket api() {
+        Docket docket = new Docket(DocumentationType.SWAGGER_2);
+        docket.apiInfo(apiInfo())
+                .groupName("1、通用api接口")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.rowan.controller.api"))
+                .paths(PathSelectors.any())
+                .build();
+        return docket;
+    }
+
+    @Bean
     public Docket userApi() {
         Docket docket = new Docket(DocumentationType.SWAGGER_2);
         docket.apiInfo(apiInfo())
-                .groupName("用户信息")
+                .groupName("2、用户信息")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.rowan.controller.user"))
                 .paths(PathSelectors.any())

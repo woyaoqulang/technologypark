@@ -44,5 +44,10 @@ public class IndexAction {
         return "index";
     }
 
+    @RequestMapping("/learn/websocket")
+    public String learnIndex() {
+        return "/learn/websocket";
+    }
+
 
 }
