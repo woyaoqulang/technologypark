@@ -15,6 +15,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+    @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         //表示客户端向服务端发送时的主题上面需要加"/app"作为前缀
         registry.setApplicationDestinationPrefixes("/app");
