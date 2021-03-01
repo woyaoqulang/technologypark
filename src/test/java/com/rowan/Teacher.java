@@ -2,7 +2,14 @@ package com.rowan;
 
 public class Teacher implements Person {
 
-    public void job(String name) {
+
+    @Override
+    public void eat() {
+
+    }
+
+    @Override
+    public void drink() {
 
     }
 }
