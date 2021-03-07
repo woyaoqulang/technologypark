@@ -15,7 +15,10 @@ function connect() {
     stompClient.connect({}, function (frame) {//连接WebSocket服务端
         console.log('Connected:' + frame);
         //通过stompClient.subscribe订阅/topic/getResponse 目标(destination)发送的消息
-        stompClient.subscribe('/user/1/message', function (response) {
+        /* stompClient.subscribe('/user/1/message', function (response) {
+             showResponse(JSON.parse(response.body));
+         });*/
+        stompClient.subscribe('/topic/message', function (response) {
             showResponse(JSON.parse(response.body));
         });
     });
