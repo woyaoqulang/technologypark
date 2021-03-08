@@ -8,7 +8,6 @@ package com.rowan;
 public class Test {
 
     public static void main(String[] args) throws Throwable {
-        Teacher teacher = new Teacher();
        /* String a = new String("1");
         String b = new String("1");
 
@@ -29,10 +28,6 @@ public class Test {
             System.out.println("失败");
         }
         test4();
-
-        Student student = new Student(2);
-        System.out.println(student.getAge());
-
 
     }
 

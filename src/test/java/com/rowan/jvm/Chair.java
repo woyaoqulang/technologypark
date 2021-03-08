@@ -1,4 +1,4 @@
-package com.rowan;
+package com.rowan.jvm;
 
 public class Chair {
 
