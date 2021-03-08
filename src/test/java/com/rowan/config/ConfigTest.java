@@ -1,4 +1,4 @@
-package com.rowan;
+package com.rowan.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.rowan.core.dao.RedisDao;

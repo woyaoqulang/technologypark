@@ -1,4 +1,4 @@
-package com.rowan;
+package com.rowan.load;
 
 public class Bowl {
 
