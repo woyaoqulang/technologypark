@@ -4,6 +4,10 @@ public class Table {
 
     static Bowl b1 = new Bowl(1);
 
+    static void gg (){
+        System.out.println("----");
+    }
+
     Table() {
         System.out.println("Table()");
         b2.f(1);
