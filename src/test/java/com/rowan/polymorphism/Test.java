@@ -1,5 +1,7 @@
 package com.rowan.polymorphism;
 
+import java.net.SocketTimeoutException;
+
 public class Test {
 
     public static void tune(A a) {
@@ -7,11 +9,14 @@ public class Test {
     }
 
     public static void tune2(InstrumentX i) {
+        System.out.println(i);
         i.play(NoteX.A);
     }
 
     public static void main(String[] args) {
-        InstrumentX windX = new WindX();
+        WindX windX = new WindX();
         tune2(windX);
+        System.out.println(windX);
+
     }
 }
